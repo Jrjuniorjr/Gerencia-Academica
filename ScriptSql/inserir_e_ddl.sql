@@ -64,11 +64,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Matricula` (
   `codigo_curso` VARCHAR(10) NOT NULL,
   `tipo` ENUM('Ativo', 'Inativo') NULL,
   `Data_inicio` VARCHAR(10) NULL,
-  `cpf` varchar(11) NOT NULL,
+  `aluno_cpf` varchar(11) NOT NULL,
   PRIMARY KEY (`num_matricula`),
     FOREIGN KEY (`codigo_curso`)
     REFERENCES `mydb`.`Curso` (`codigo`),
-    FOREIGN KEY (`cpf`)
+    FOREIGN KEY (`aluno_cpf`)
     REFERENCES `mydb`.`Aluno` (`cpf`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -192,12 +192,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123456789', 'Jennifer', 'Calazans', 'Vestibular', '05/10/1997');
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123456788', 'Alisson', 'Barboza', 'Transferencia', '02/08/1926');
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123456888', 'Momedes', 'Junior', 'Vestibular', '03/06/1998');
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123458888', 'Lucas', 'Leal', 'Vestibular', '09/07/1995');
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123488888', 'Creuza', 'Silva', 'Transferencia', '01/01/1999');
-INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('123888888', 'Veva', 'Aragao', 'Transferencia', '01/03/1989');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('987654321', 'Jennifer', 'Calazans', 'Vestibular', '05/10/1997');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('998765432', 'Alisson', 'Barboza', 'Transferencia', '02/08/1926');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999876543', 'Momedes', 'Junior', 'Vestibular', '03/06/1998');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999987654', 'Lucas', 'Leal', 'Vestibular', '09/07/1995');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999998765', 'Creuza', 'Silva', 'Transferencia', '01/01/1999');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999999876', 'Veva', 'Aragao', 'Transferencia', '01/03/1989');
 
 COMMIT;
 
@@ -230,12 +230,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123456789, 'C3', 'Ativo', '02/02/2016', 123456789);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123456788, 'C3', 'Ativo', '02/02/2016', 123456788);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123456888, 'C3', 'Ativo', '08/02/2016', 123456888);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123458888, 'C3', 'Ativo', '13/08/2016', 123458888);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123488888, 'M1', 'Ativo', '08/08/2017', 123488888);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `cpf`) VALUES (123888888, 'E3', 'Inativo', '05/02/2013', 12388888);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123456789, 'C3', 'Ativo', '02/02/2016', 987654321);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123456788, 'C3', 'Ativo', '02/02/2016', 998765432);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123456888, 'C3', 'Ativo', '08/02/2016', 999876543);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123458888, 'C3', 'Ativo', '13/08/2016', 999987654);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123488888, 'M1', 'Ativo', '08/08/2017', 999998765);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123888888, 'E3', 'Inativo', '05/02/2013', 99999976);
 
 COMMIT;
 
