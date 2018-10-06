@@ -46,6 +46,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Curso` (
   `codigo` VARCHAR(10) NOT NULL,
+  `nome_curso` VARCHAR(100) NULL,
   `num_credito_conclusao` INT NULL,
   `codigo_departamento` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`codigo`),
@@ -150,6 +151,25 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Historico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Cursando` (
+  `matricula` INT NOT NULL,
+  `codigo_disciplina` VARCHAR(10) NOT NULL,
+  `primeiro_gq` VARCHAR(10) NULL,
+  `segundo_gq` VARCHAR(10) NULL,
+    FOREIGN KEY (`codigo_disciplina`)
+    REFERENCES `mydb`.`Disciplina` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (`matricula`)
+    REFERENCES `mydb`.`Matricula` (`num_matricula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Composto_Obrigatoria`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Composto_Obrigatoria` (
@@ -198,6 +218,7 @@ INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento
 INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999987654', 'Lucas', 'Leal', 'Vestibular', '09/07/1995');
 INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999998765', 'Creuza', 'Silva', 'Transferencia', '01/01/1999');
 INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('999999876', 'Veva', 'Aragao', 'Transferencia', '01/03/1989');
+INSERT INTO `mydb`.`Aluno` (`cpf`, `Nome`, `Sobrenome`, `Tipo`, `Data_nascimento`) VALUES ('111111111', 'João', 'Bosco', 'Transferencia', '01/05/1995');
 
 COMMIT;
 
@@ -218,9 +239,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`Curso` (`codigo`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('C3', 300, 'CCT');
-INSERT INTO `mydb`.`Curso` (`codigo`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('E3', 360, 'CCT');
-INSERT INTO `mydb`.`Curso` (`codigo`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('M1', 500, 'CCH');
+INSERT INTO `mydb`.`Curso` (`codigo`, `nome_curso`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('C3', 'Ciência da Computação', 300, 'CCT');
+INSERT INTO `mydb`.`Curso` (`codigo`, `nome_curso`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('E3', 'Engenharia Civil', 360, 'CCT');
+INSERT INTO `mydb`.`Curso` (`codigo`, `nome_curso`, `num_credito_conclusao`, `codigo_departamento`) VALUES ('M1', 'Medidicina', 500, 'CCH');
 
 COMMIT;
 
@@ -235,7 +256,8 @@ INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_i
 INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123456888, 'C3', 'Ativo', '08/02/2016', 999876543);
 INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123458888, 'C3', 'Ativo', '13/08/2016', 999987654);
 INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123488888, 'M1', 'Ativo', '08/08/2017', 999998765);
-INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123888888, 'E3', 'Inativo', '05/02/2013', 99999976);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (123888888, 'E3', 'Inativo', '05/02/2013', 999999976);
+INSERT INTO `mydb`.`Matricula` (`num_matricula`, `codigo_curso`, `tipo`, `Data_inicio`, `aluno_cpf`) VALUES (128888888, 'E3', 'Ativo', '02/02/2014', 111111111);
 
 COMMIT;
 
@@ -251,6 +273,7 @@ INSERT INTO `mydb`.`Aluno_Endereco` (`cpf`, `rua`, `cep`, `bairro`) VALUES ('123
 INSERT INTO `mydb`.`Aluno_Endereco` (`cpf`, `rua`, `cep`, `bairro`) VALUES ('123488888', 'Alelo', '3111111', 'Ipiraçuru');
 INSERT INTO `mydb`.`Aluno_Endereco` (`cpf`, `rua`, `cep`, `bairro`) VALUES ('123888888', 'Bigorna', '2121212', 'Arapiraca');
 
+
 COMMIT;
 
 -- -----------------------------------------------------
@@ -264,6 +287,8 @@ INSERT INTO `mydb`.`Professor` (`matricula_prof`, `CFE`, `Nome`, `Sobrenome`, `c
 INSERT INTO `mydb`.`Professor` (`matricula_prof`, `CFE`, `Nome`, `Sobrenome`, `codigo_departamento`) VALUES (1555, '44444', 'Ariano', 'Suassunga', 'CCH');
 INSERT INTO `mydb`.`Professor` (`matricula_prof`, `CFE`, `Nome`, `Sobrenome`, `codigo_departamento`) VALUES (1235, '55555', 'Edgar', 'Poe', 'CCH');
 INSERT INTO `mydb`.`Professor` (`matricula_prof`, `CFE`, `Nome`, `Sobrenome`, `codigo_departamento`) VALUES (1255, '66666', 'Alceu', 'Valença', 'CCH');
+INSERT INTO `mydb`.`Professor` (`matricula_prof`, `CFE`, `Nome`, `Sobrenome`, `codigo_departamento`) VALUES (1225, '77777', 'Pele', 'Souza', 'CCH');
+
 
 COMMIT;
 
@@ -283,6 +308,7 @@ INSERT INTO `mydb`.`Disciplina` (`codigo`, `num_total_horas`, `codigo_departamen
 INSERT INTO `mydb`.`Disciplina` (`codigo`, `num_total_horas`, `codigo_departamento`, `carga_horaria`, `credito`, `nome_disciplina`, `num_matricula`) VALUES ('CIV0304', 120, 'CCT', 60, 60, 'Cálculo 2', 1234);
 INSERT INTO `mydb`.`Disciplina` (`codigo`, `num_total_horas`, `codigo_departamento`, `carga_horaria`, `credito`, `nome_disciplina`, `num_matricula`) VALUES ('INF0105', 120, 'CCT', 60, 60, 'Criptografia', 1444);
 INSERT INTO `mydb`.`Disciplina` (`codigo`, `num_total_horas`, `codigo_departamento`, `carga_horaria`, `credito`, `nome_disciplina`, `num_matricula`) VALUES ('MED0204', 100, 'CCH', 50, 50, 'Ecografia', 1235);
+INSERT INTO `mydb`.`Disciplina` (`codigo`, `num_total_horas`, `codigo_departamento`, `carga_horaria`, `credito`, `nome_disciplina`, `num_matricula`) VALUES ('INF0106', 100, 'CCT', 50, 50, 'Computação Forense', 1244);
 
 COMMIT;
 
@@ -294,13 +320,26 @@ START TRANSACTION;
 USE `mydb`;
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12345678, 'INF0102', 8.2, '24/11/2017');
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12345678, 'INF0103', 6.8, '26/11/2016');
-INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12345688, 'INF0102', 9.0, '');
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12345688, 'INF0103', 7.0, '05/12/2016');
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12345888, 'INF0103', 7.5, '05/12/2016');
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12388888, 'CIV0301', 7.2, '29/11/2016');
 INSERT INTO `mydb`.`Historico` (`num_matricula`, `codigo_disciplina`, `nota_final`, `data_cursada`) VALUES (12348888, 'MED0203', 9.2, '06/12/2017');
 
 COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Cursando`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Cursando` (`matricula`, `codigo_disciplina`, `primeiro_gq`, `segundo_gq`) VALUES (12345688, 'INF0102', 5.6, NULL);
+INSERT INTO `mydb`.`Cursando` (`matricula`, `codigo_disciplina`, `primeiro_gq`, `segundo_gq`) VALUES (12348888, 'MED0202', 7.6, 5.9);
+INSERT INTO `mydb`.`Cursando` (`matricula`, `codigo_disciplina`, `primeiro_gq`, `segundo_gq`) VALUES (12348888, 'MED0203', 6.8, NULL);
+INSERT INTO `mydb`.`Cursando` (`matricula`, `codigo_disciplina`, `primeiro_gq`, `segundo_gq`) VALUES (12345688, 'INF0103', 0, 0);
+
+COMMIT;
+
 
 -- -----------------------------------------------------
 -- Data for table `mydb`.`Composto_Obrigatoria`
@@ -325,6 +364,8 @@ START TRANSACTION;
 USE `mydb`;
 INSERT INTO `mydb`.`Optativa` (`codigo_disciplina`, `codigo_curso`) VALUES ('INF0105', 'C3');
 INSERT INTO `mydb`.`Optativa` (`codigo_disciplina`, `codigo_curso`) VALUES ('MED0204', 'M1');
+INSERT INTO `mydb`.`Optativa` (`codigo_disciplina`, `codigo_curso`) VALUES ('INF0106', 'C3');
+
 
 COMMIT;
 
