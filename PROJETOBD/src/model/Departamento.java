@@ -8,16 +8,21 @@ public class Departamento {
 	private char bloco;
 	private ArrayList<Professor> professores;
 	private ArrayList<Curso> cursos;
-	private ArrayList<Disciplina> disciplina;
+	private ArrayList<Disciplina> disciplinas;
 	
 	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
 		this.nome = nome;
 		this.bloco = bloco;
+		professores = new ArrayList<>();
+		cursos = new ArrayList<>();
+		disciplinas = new ArrayList<>();
 	}
 	
 	public Departamento(){
-		
+		professores = new ArrayList<>();
+		cursos = new ArrayList<>();
+		disciplinas = new ArrayList<>();
 	}
 	
 	public String getCodigo() {
@@ -55,14 +60,25 @@ public class Departamento {
 		this.cursos = cursos;
 	}
 
-	public ArrayList<Disciplina> getDisciplina() {
-		return disciplina;
+	public ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
-	public void setDisciplina(ArrayList<Disciplina> disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 	
+	public void addProfessor(Professor professor){
+		professores.add(professor);
+	}
+	
+	public void addCurso(Curso curso){
+		cursos.add(curso);
+	}
+	
+	public void addDisciplina(Disciplina disciplina){
+		disciplinas.add(disciplina);
+	}
 	
 	
 	

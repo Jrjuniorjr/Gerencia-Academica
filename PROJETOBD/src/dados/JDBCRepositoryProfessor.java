@@ -26,7 +26,8 @@ public class JDBCRepositoryProfessor implements IRepProfessor{
 				stmt.setString(2, e.getCfe());
 				stmt.setString(3, e.getNome());
 				stmt.setString(4, e.getSobrenome());
-				stmt.setString(5, e.getDepartamento().getCodigo());
+				stmt.setString(5, e.getCodigDepartamento());
+				//stmt.setString(5, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -49,7 +50,8 @@ public class JDBCRepositoryProfessor implements IRepProfessor{
 				stmt.setString(2, e.getCfe());
 				stmt.setString(3, e.getNome());
 				stmt.setString(4, e.getSobrenome());
-				stmt.setString(5, e.getDepartamento().getCodigo());
+				stmt.setString(5, e.getCodigDepartamento());
+				//stmt.setString(5, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -96,7 +98,8 @@ public class JDBCRepositoryProfessor implements IRepProfessor{
 			professor.setCfe(rs.getString("CFE"));
 			professor.setNome(rs.getString("Nome"));
 			professor.setSobrenome(rs.getString("Sobrenome"));
-			professor.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
+			professor.setCodigoDepartamento("codigo_departamento");
+			//professor.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
 			rs.close();
 			stmt.close();
 			con.close();
