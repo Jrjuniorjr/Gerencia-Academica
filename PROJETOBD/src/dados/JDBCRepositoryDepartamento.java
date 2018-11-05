@@ -12,7 +12,8 @@ import util.JDBCConnectionUtil;
 import util.SQLUtil;
 
 public class JDBCRepositoryDepartamento implements IRepDepartamento{
-
+	private Departamento d;
+	
 	@Override
 	public void inserir(Departamento e) throws Exception {
 		Connection con;
@@ -79,7 +80,6 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 		Connection con;
 		PreparedStatement stmt;
 		ResultSet rs;
-		Departamento departamento = null;
 		String sql = SQLUtil.getProperties().getProperty("sql.departamento.procurar");
 		try{
 			con = JDBCConnectionUtil.getConnection();
@@ -87,21 +87,42 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 			stmt.setString(1, key);
 			rs = stmt.executeQuery();
 			rs.next();
-			departamento = new Departamento();
-			departamento.setCodigo(rs.getString("codigo"));
-			departamento.setNome(rs.getString("nome"));
-			////departamento.setBloco(rs.getString(columnIndex));
-			departamento.setProfessores(procurarProfessores(departamento.getCodigo()));
-			departamento.setCursos(procurarCursos(departamento.getCodigo()));
+			d = new Departamento();
+			d.setCodigo(rs.getString("codigo"));
+			d.setNome(rs.getString("nome"));
+			////d.setBloco(rs.getString(columnIndex));
+			d.setProfessores(procurarProfessores(d.getCodigo()));
+			d.setCursos(procurarCursos(d.getCodigo()));
 			//falta disciplina
+			preencherArrayListsComDepartamento();
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){
 			throw ex;
 		}
-		return departamento;
+		return d;
 	}
 
+	private void preencherArrayListsComDepartamento(){
+		for (Professor professor: d.getProfessores()){
+			professor.setDepartamento(d);
+		}
+		for (Curso curso: d.getCursos()){
+			curso.setDepartamento(d);
+		}
+		/*for (Disciplina disciplina: d.getDisciplinas()){
+			disciplina.setDepartamento(d);
+		}*/
+		
+		
+	}
+	
+	
+	private ArrayList<Disciplina> procurarDisciplina(String key) throws Exception{
+		return null;
+	}
+	
+	
 	private ArrayList<Professor> procurarProfessores(String key) throws Exception{
 		Connection con;
 		PreparedStatement stmt;
@@ -119,7 +140,7 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 				professores.add(new Professor(rs.getString("matricula_prof"),
 						rs.getString("CFE"),
 						rs.getString("Nome"), rs.getString("Sobrenome"),
-						rs.getString("codigo_departamento")));
+						null));
 			}
 			
 			}
@@ -148,7 +169,7 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 				cursos.add(new Curso(rs.getString("codigo"), 
 						rs.getString("nome_curso"),
 						rs.getInt("num_credito_conclusao"),
-						rs.getString("codigo_departamento")));
+						null));
 			}
 			
 			}

@@ -7,16 +7,17 @@ public class Professor {
 	private String cfe;
 	private String nome;
 	private String sobrenome;
-	//private Departamento departamento;
-	private String codigoDepartamento;
+	private Departamento departamento;
+	//private String codigoDepartamento;
 	private ArrayList<Disciplina> disciplinas;
 	
-	public Professor(String matricula, String cfe, String nome, String sobrenome, String codigoDepartamento) {
+	public Professor(String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
 		this.matricula = matricula;
 		this.cfe = cfe;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.codigoDepartamento = codigoDepartamento;
+		this.departamento = departamento;
+		//this.codigoDepartamento = codigoDepartamento;
 		this.disciplinas = new ArrayList<>();
 	}
 	
@@ -49,13 +50,13 @@ public class Professor {
 		this.sobrenome = sobrenome;
 	}
 
-	public String getCodigDepartamento() {
+	/*public String getCodigDepartamento() {
 		return codigoDepartamento;
 	}
 
 	public void setCodigoDepartamento(String codigoDepartamento) {
 		this.codigoDepartamento = codigoDepartamento;
-	}
+	}*/
 
 	public ArrayList<Disciplina> getDisciplinas() {
 		return disciplinas;
@@ -67,12 +68,11 @@ public class Professor {
 
 	
 	
-	/*public Departamento getDepartamento() {
+	public Departamento getDepartamento() {
 		return departamento;
 	}
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
-	*/
 	
 }

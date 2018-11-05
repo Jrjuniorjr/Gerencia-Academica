@@ -26,8 +26,8 @@ public class JDBCRepositoryCurso implements IRepCurso{
 				stmt.setString(1, e.getCodigo());
 				stmt.setString(2, e.getNomeCurso());
 				stmt.setInt(3, e.getNumeroCreditoConclusao());
-				stmt.setString(4, e.getCodigoDepartamento());
-				//stmt.setString(4, e.getDepartamento().getCodigo());
+				//stmt.setString(4, e.getCodigoDepartamento());
+				stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -49,8 +49,8 @@ public class JDBCRepositoryCurso implements IRepCurso{
 				stmt.setString(1, e.getCodigo());
 				stmt.setString(2, e.getNomeCurso());
 				stmt.setInt(3, e.getNumeroCreditoConclusao());
-				stmt.setString(4, e.getCodigoDepartamento());
-				//stmt.setString(4, e.getDepartamento().getCodigo());
+				//stmt.setString(4, e.getCodigoDepartamento());
+				stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -96,8 +96,8 @@ public class JDBCRepositoryCurso implements IRepCurso{
 			curso.setCodigo(rs.getString("codigo"));
 			curso.setNomeCurso(rs.getString("nome_curso"));
 			curso.setNumeroCreditoConclusao(rs.getInt("num_credito_conclusao"));
-			//curso.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
-			curso.setCodigoDepartamento(rs.getString("codigo_departamento"));
+			curso.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
+			//curso.setCodigoDepartamento(rs.getString("codigo_departamento"));
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){

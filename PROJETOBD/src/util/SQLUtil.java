@@ -12,7 +12,7 @@ public class SQLUtil {
 private static Properties properties;
     
     static{
-        propertie s= new Properties();
+        properties = new Properties();
         try {
             properties.load(new FileInputStream("PropertiesSQL.properties"));
         } catch (FileNotFoundException ex) {

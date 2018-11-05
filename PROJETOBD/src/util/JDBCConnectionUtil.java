@@ -16,9 +16,9 @@ public class JDBCConnectionUtil {
 
 	static {
 
-		p = new Properties();
+		properties = new Properties();
 		try {
-			p.load(new FileInputStream("PropertiesJDBC.properties"));
+			properties.load(new FileInputStream("PropertiesJDBC.properties"));
 		} catch (FileNotFoundException ex) {
 			System.out.println("Arquivo nao encontrado");
 		} catch (IOException ex) {
