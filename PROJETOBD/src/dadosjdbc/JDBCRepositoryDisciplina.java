@@ -1,24 +1,24 @@
-package dados;
+package dadosjdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import interfaces.IRepCurso;
+import interfaces.IRepDisciplina;
 import model.Curso;
 import model.Departamento;
-import model.Professor;
+import model.Disciplina;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
 
-public class JDBCRepositoryCurso implements IRepCurso{
+/*public class JDBCRepositoryDisciplina implements IRepDisciplina{
 
 	@Override
-	public void inserir(Curso e) throws Exception {
+	public void inserir(Disciplina e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.curso.inserir");
+		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.inserir");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
@@ -26,8 +26,8 @@ public class JDBCRepositoryCurso implements IRepCurso{
 				stmt.setString(1, e.getCodigo());
 				stmt.setString(2, e.getNomeCurso());
 				stmt.setInt(3, e.getNumeroCreditoConclusao());
-				//stmt.setString(4, e.getCodigoDepartamento());
-				stmt.setString(4, e.getDepartamento().getCodigo());
+				stmt.setString(4, e.getCodigoDepartamento());
+				//stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -38,19 +38,19 @@ public class JDBCRepositoryCurso implements IRepCurso{
 	}
 
 	@Override
-	public void atualizar(Curso e) throws Exception {
+	public void atualizar(Disciplina e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.curso.atualizar");
+		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.atualizar");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
 				stmt.setString(1, e.getCodigo());
-				stmt.setString(2, e.getNomeCurso());
+				stmt.setString(2, e);
 				stmt.setInt(3, e.getNumeroCreditoConclusao());
-				//stmt.setString(4, e.getCodigoDepartamento());
-				stmt.setString(4, e.getDepartamento().getCodigo());
+				stmt.setString(4, e.getCodigoDepartamento());
+				//stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -61,10 +61,10 @@ public class JDBCRepositoryCurso implements IRepCurso{
 	}
 
 	@Override
-	public void remover(Curso e) throws Exception {
+	public void remover(Disciplina e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.curso.remover");
+		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.remover");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class JDBCRepositoryCurso implements IRepCurso{
 	}
 
 	@Override
-	public Curso procurar(String key) throws Exception {
+	public Disciplina procurar(String key) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
 		ResultSet rs;
@@ -96,8 +96,8 @@ public class JDBCRepositoryCurso implements IRepCurso{
 			curso.setCodigo(rs.getString("codigo"));
 			curso.setNomeCurso(rs.getString("nome_curso"));
 			curso.setNumeroCreditoConclusao(rs.getInt("num_credito_conclusao"));
-			curso.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
-			//curso.setCodigoDepartamento(rs.getString("codigo_departamento"));
+			//curso.setDepartamento(procurarDepartamento(rs.getString("codigo_departamento")));
+			curso.setCodigoDepartamento(rs.getString("codigo_departamento"));
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){
@@ -105,8 +105,7 @@ public class JDBCRepositoryCurso implements IRepCurso{
 		}
 		return curso;
 	}
-
-	private Departamento procurarDepartamento(String key) throws Exception{
+	private Departamento procurarCoisa(String key) throws Exception{
 		Connection con;
 		PreparedStatement stmt;
 		ResultSet rs;
@@ -130,5 +129,4 @@ public class JDBCRepositoryCurso implements IRepCurso{
 			throw ex;
 		}
 		return departamento;
-	}
-}
+	}*/

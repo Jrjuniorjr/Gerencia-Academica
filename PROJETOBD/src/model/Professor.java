@@ -2,14 +2,30 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Professor")
 public class Professor {
+	@Id
+	@Column(name="matricula_prof")
 	private String matricula;
+	
+	@Column(name="CFE")
 	private String cfe;
+	
+	@Column(name="Nome")
 	private String nome;
+	
+	@Column(name="Sobrenome")
 	private String sobrenome;
+	
+	@ManyToOne(fetch= FetchType.EAGER)
+	@Column(name="codigo_departamento")
 	private Departamento departamento;
-	//private String codigoDepartamento;
-	private ArrayList<Disciplina> disciplinas;
+	
+	
+	//private ArrayList<Disciplina> disciplinas;
 	
 	public Professor(String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
 		this.matricula = matricula;
@@ -17,12 +33,11 @@ public class Professor {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.departamento = departamento;
-		//this.codigoDepartamento = codigoDepartamento;
-		this.disciplinas = new ArrayList<>();
+		//this.disciplinas = new ArrayList<>();
 	}
 	
 	public Professor(){
-		this.disciplinas = new ArrayList<>();
+		//this.disciplinas = new ArrayList<>();
 	}
 
 	public String getMatricula() {
@@ -50,21 +65,13 @@ public class Professor {
 		this.sobrenome = sobrenome;
 	}
 
-	/*public String getCodigDepartamento() {
-		return codigoDepartamento;
-	}
-
-	public void setCodigoDepartamento(String codigoDepartamento) {
-		this.codigoDepartamento = codigoDepartamento;
-	}*/
-
-	public ArrayList<Disciplina> getDisciplinas() {
+	/*public ArrayList<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
 	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
-	}
+	}*/
 
 	
 	

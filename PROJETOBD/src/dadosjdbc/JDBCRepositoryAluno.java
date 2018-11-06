@@ -1,4 +1,4 @@
-package dados;
+package dadosjdbc;
 
 public class JDBCRepositoryAluno {
 	

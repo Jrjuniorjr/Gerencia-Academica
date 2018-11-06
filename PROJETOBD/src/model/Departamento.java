@@ -2,27 +2,42 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Departamento")
 public class Departamento {
+	@Id
+	@Column(name="codigo")
 	private String codigo;
+	@Column(name="nome")
 	private String nome;
+	@Column(name="bloco")
 	private char bloco;
-	private ArrayList<Professor> professores;
-	private ArrayList<Curso> cursos;
-	private ArrayList<Disciplina> disciplinas;
 	
+	@OneToMany(mappedBy="departamento")
+	private ArrayList<Professor> professores;
+	
+	@OneToMany(mappedBy="departamento")
+	private ArrayList<Curso> cursos;
+	
+	/*@OneToMany(mappedBy="departamento")
+	private ArrayList<Disciplina> disciplinas;
+	*/
 	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
 		this.nome = nome;
 		this.bloco = bloco;
 		professores = new ArrayList<>();
 		cursos = new ArrayList<>();
-		disciplinas = new ArrayList<>();
+		//disciplinas = new ArrayList<>();
 	}
+	
 	
 	public Departamento(){
 		professores = new ArrayList<>();
 		cursos = new ArrayList<>();
-		disciplinas = new ArrayList<>();
+		//disciplinas = new ArrayList<>();
 	}
 	
 	public String getCodigo() {
@@ -60,13 +75,13 @@ public class Departamento {
 		this.cursos = cursos;
 	}
 
-	public ArrayList<Disciplina> getDisciplinas() {
+	/*public ArrayList<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
 	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
-	}
+	}*/
 	
 	public void addProfessor(Professor professor){
 		professores.add(professor);
@@ -76,9 +91,9 @@ public class Departamento {
 		cursos.add(curso);
 	}
 	
-	public void addDisciplina(Disciplina disciplina){
+	/*public void addDisciplina(Disciplina disciplina){
 		disciplinas.add(disciplina);
-	}
+	}*/
 	
 	
 	

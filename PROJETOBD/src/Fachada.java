@@ -1,5 +1,5 @@
 import controllers.*;
-import dados.*;
+import dadosjdbc.*;
 import model.*;
 
 public class Fachada {

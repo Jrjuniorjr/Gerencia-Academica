@@ -1,4 +1,4 @@
-package dados;
+package dadosjdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

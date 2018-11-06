@@ -1,18 +1,29 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Curso")
 public class Curso {
+	@Id
+	@Column(name="codigo")
 	private String codigo;
+	
+	@Column(name="nome_curso")
 	private String nomeCurso;
+	
+	@Column(name="num_credito_conclusao")
 	private int numeroCreditoConclusao;
+	
+	@ManyToOne(fetch= FetchType.EAGER)
+	@Column(name="codigo_departamento")
 	private Departamento departamento;
-	//private String codigoDepartamento;
 	
 	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
 		this.codigo = codigo;
 		this.nomeCurso = nomeCurso;
 		this.numeroCreditoConclusao = numeroCreditoConclusao;
 		this.departamento = departamento;
-		//this.codigoDepartamento = codigoDepartamento;
 	}
 	
 	public Curso(){
@@ -43,14 +54,6 @@ public class Curso {
 	public void setNumeroCreditoConclusao(int numeroCreditoConclusao) {
 		this.numeroCreditoConclusao = numeroCreditoConclusao;
 	}
-
-	/*public String getCodigoDepartamento() {
-		return codigoDepartamento;
-	}
-
-	public void setCodigoDepartamento(String codigoDepartamento) {
-		this.codigoDepartamento = codigoDepartamento;
-	}*/
 
 	public Departamento getDepartamento() {
 		return departamento;
