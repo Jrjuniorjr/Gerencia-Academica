@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,13 @@ public class Curso {
 	@ManyToOne(fetch= FetchType.EAGER)
 	@Column(name="codigo_departamento")
 	private Departamento departamento;
+	
+	
+	@OneToMany(
+			mappedBy="curso",
+			fetch=FetchType.LAZY
+	)
+	private ArrayList<Matricula> matriculas;
 	
 	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
 		this.codigo = codigo;
@@ -61,6 +70,14 @@ public class Curso {
 
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+
+	public ArrayList<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(ArrayList<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 	

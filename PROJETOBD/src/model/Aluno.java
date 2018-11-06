@@ -5,18 +5,38 @@ import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
+//import org.hibernate.annotations.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name="Aluno")
 public class Aluno {
+	@Id
+	@Column(name="cpf")
 	private String cpf;
+	
+	@Column(name="nome")
 	private String nome;
+	
+	@Column(name="sobrenome")
 	private String sobrenome;
+	
+	@Column(name="tipoEntrada")
 	private Enum tipo;
+	
+	@Column(name="data_nascimento")
 	private Date dataNascimento;
 	
 	@OneToOne(cascade=
 	CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Endereco endereco;
 	
+	
+	@OneToMany(
+			mappedBy="aluno",
+			fetch = FetchType.LAZY
+	)
 	private ArrayList<Matricula> matriculas;
 
 	
@@ -73,6 +93,14 @@ public class Aluno {
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public ArrayList<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(ArrayList<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 	

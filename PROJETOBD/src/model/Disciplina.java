@@ -1,28 +1,59 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Disciplina")
 public class Disciplina {
+
+	@Id
+	@Column(name="codigo")
 	private String codigo;
+
+	@Column(name="num_total_horas")
 	private int numTotalHoras;
-	private String codigoDepartamento;
+
+	@ManyToOne(
+			fetch=FetchType.EAGER
+	)
+	@JoinColumn(name="codigo_departamento")
+	private Departamento departamento;
+
+	@Column(name="carga_horaria")
 	private int cargaHoraria;
+
+	@Column(name="credito")
 	private int credito;
+
+	
+	@Column(name="nomeDisciplina")
 	private String nomeDisciplina;
-	private String numMatricula;
+
+	@ManyToOne(
+			fetch=FetchType.EAGER
+	)
+	@JoinColumn(name="matricula_prof")
+	private Professor professor;
+	
+	
+	
+	//private String numMatricula;
+
 	//private ArrayList<Matricula> alunosCursando;
 	//private ArrayList<Matricula> historico;
 	
 	
-	public Disciplina(String codigo, int numTotalHoras, String codigoDepartamento,
+	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,
 			int cargaHoraria, int credito,
-			String nomeDisciplina, String numMatricula) {
+			String nomeDisciplina) {
 		super();
 		this.codigo = codigo;
 		this.numTotalHoras = numTotalHoras;
-		this.codigoDepartamento = codigoDepartamento;
+		this.departamento = departamento;
 		this.cargaHoraria = cargaHoraria;
 		this.credito = credito;
 		this.nomeDisciplina = nomeDisciplina;
-		this.numMatricula = numMatricula;
+		
 	}
 
 
@@ -46,13 +77,23 @@ public class Disciplina {
 	}
 
 
-	public String getCodigoDepartamento() {
-		return codigoDepartamento;
+	public Departamento getDepartamento() {
+		return departamento;
 	}
 
 
-	public void setCodigoDepartamento(String codigoDepartamento) {
-		this.codigoDepartamento = codigoDepartamento;
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 
 
@@ -85,16 +126,6 @@ public class Disciplina {
 		this.nomeDisciplina = nomeDisciplina;
 	}
 
-
-	public String getNumMatricula() {
-		return numMatricula;
-	}
-
-
-	public void setNumMatricula(String numMatricula) {
-		this.numMatricula = numMatricula;
-	}
-	
 	
 	
 	

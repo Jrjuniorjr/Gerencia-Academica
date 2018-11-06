@@ -21,11 +21,12 @@ public class Professor {
 	private String sobrenome;
 	
 	@ManyToOne(fetch= FetchType.EAGER)
-	@Column(name="codigo_departamento")
+	@JoinColumn(name="codigo_departamento")
 	private Departamento departamento;
 	
-	
-	//private ArrayList<Disciplina> disciplinas;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="codigo_disciplina")
+	private ArrayList<Disciplina> disciplinas;
 	
 	public Professor(String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
 		this.matricula = matricula;
@@ -78,6 +79,14 @@ public class Professor {
 	public Departamento getDepartamento() {
 		return departamento;
 	}
+	public ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}

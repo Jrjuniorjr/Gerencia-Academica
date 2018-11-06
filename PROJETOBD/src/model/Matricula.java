@@ -1,12 +1,37 @@
 package model;
 
 import java.sql.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name="Matricula")
 public class Matricula {
+	
+	@ManyToOne(
+			fetch=FetchType.EAGER
+	)
+	@JoinColumn(
+			name="aluno_cpf"
+	)
 	private Aluno aluno;
+	
+	
+	@ManyToOne(
+			fetch=FetchType.EAGER
+	)
+	@JoinColumn(
+			name="codigo_curso"
+	)
 	private Curso curso;
+	
+	@Id
+	@Column(name="matricula")
 	private String matricula;
+	
+	@Column(name="data_inicio")
 	private Date dataInicio;
+	
+	
 	//private ArrayList<Disciplina> disciplinasCursadas;
 	//private ArrayList<Disciplina> disciplinasCursando;
 	

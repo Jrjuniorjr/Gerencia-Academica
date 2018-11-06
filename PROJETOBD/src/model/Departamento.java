@@ -15,15 +15,24 @@ public class Departamento {
 	@Column(name="bloco")
 	private char bloco;
 	
-	@OneToMany(mappedBy="departamento")
+	@OneToMany(
+			mappedBy="departamento",
+			fetch= FetchType.LAZY
+	)
 	private ArrayList<Professor> professores;
 	
-	@OneToMany(mappedBy="departamento")
+	@OneToMany(
+			mappedBy="departamento",
+			fetch= FetchType.LAZY
+	)
 	private ArrayList<Curso> cursos;
 	
-	/*@OneToMany(mappedBy="departamento")
+	@OneToMany(
+			mappedBy="departamento",
+			fetch=FetchType.LAZY
+	)
 	private ArrayList<Disciplina> disciplinas;
-	*/
+	
 	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
 		this.nome = nome;
@@ -40,6 +49,16 @@ public class Departamento {
 		//disciplinas = new ArrayList<>();
 	}
 	
+	public ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+
+	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+
 	public String getCodigo() {
 		return codigo;
 	}
