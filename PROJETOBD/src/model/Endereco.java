@@ -19,7 +19,9 @@ public class Endereco {
 	@Column(name="bairro")
 	private String bairro;
 
-	public Endereco() {		}
+	public Endereco() {
+		
+	}
 	
 	public String getAlunoCpf() {
 		return alunoCpf;

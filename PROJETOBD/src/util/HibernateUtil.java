@@ -9,6 +9,8 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.spi.SessionFactoryServiceInitiator;
 import org.hibernate.service.spi.SessionFactoryServiceRegistryBuilder;
 
+
+
 import model.Curso;
 import model.Departamento;
 import model.Professor;
@@ -21,7 +23,8 @@ public class HibernateUtil {
 
 		Configuration con = new Configuration();
 		
-
+		con.configure();
+		
 		sessionFactory = con.buildSessionFactory();
 
 		session = sessionFactory.openSession();

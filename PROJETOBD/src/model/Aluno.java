@@ -37,7 +37,7 @@ public class Aluno {
 			mappedBy="aluno",
 			fetch = FetchType.LAZY
 	)
-	private ArrayList<Matricula> matriculas;
+	private ArrayList<Matricula> matriculas = new ArrayList<>();
 
 	
 	

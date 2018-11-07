@@ -19,19 +19,19 @@ public class Departamento {
 			mappedBy="departamento",
 			fetch= FetchType.LAZY
 	)
-	private ArrayList<Professor> professores;
+	private ArrayList<Professor> professores = new ArrayList<>();
 	
 	@OneToMany(
 			mappedBy="departamento",
 			fetch= FetchType.LAZY
 	)
-	private ArrayList<Curso> cursos;
+	private ArrayList<Curso> cursos = new ArrayList<>();
 	
 	@OneToMany(
 			mappedBy="departamento",
 			fetch=FetchType.LAZY
 	)
-	private ArrayList<Disciplina> disciplinas;
+	private ArrayList<Disciplina> disciplinas = new ArrayList<>();
 	
 	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
@@ -39,14 +39,12 @@ public class Departamento {
 		this.bloco = bloco;
 		professores = new ArrayList<>();
 		cursos = new ArrayList<>();
-		//disciplinas = new ArrayList<>();
+		disciplinas = new ArrayList<>();
 	}
 	
 	
 	public Departamento(){
-		professores = new ArrayList<>();
-		cursos = new ArrayList<>();
-		//disciplinas = new ArrayList<>();
+		
 	}
 	
 	public ArrayList<Disciplina> getDisciplinas() {

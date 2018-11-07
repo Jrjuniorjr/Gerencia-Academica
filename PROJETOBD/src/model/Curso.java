@@ -26,7 +26,7 @@ public class Curso {
 			mappedBy="curso",
 			fetch=FetchType.LAZY
 	)
-	private ArrayList<Matricula> matriculas;
+	private ArrayList<Matricula> matriculas = new ArrayList<>();
 	
 	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
 		this.codigo = codigo;
