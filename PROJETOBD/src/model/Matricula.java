@@ -32,9 +32,6 @@ public class Matricula {
 	private Date dataInicio;
 	
 	
-	//private ArrayList<Disciplina> disciplinasCursadas;
-	//private ArrayList<Disciplina> disciplinasCursando;
-	
 	public Matricula(Aluno aluno, Curso curso, String matricula, Date dataInicio) {
 		super();
 		this.aluno = aluno;

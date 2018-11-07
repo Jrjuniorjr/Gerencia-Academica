@@ -1,8 +1,12 @@
 package model;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
+
+
 
 @Entity
 @Table(name="Professor")
@@ -24,18 +28,18 @@ public class Professor {
 	@JoinColumn(name="codigo_departamento")
 	private Departamento departamento;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_disciplina")
-	private ArrayList<Disciplina> disciplinas = new ArrayList<>();
+	@OneToMany(
+			mappedBy="professor",
+			fetch= FetchType.LAZY
+	)
+	private List<Disciplina> disciplinas = new ArrayList<>();
 	
 	public Professor(String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
 		this.matricula = matricula;
 		this.cfe = cfe;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.departamento = departamento;
-		//this.disciplinas = new ArrayList<>();
-	}
+		}
 	
 	public Professor(){
 	}
@@ -73,11 +77,11 @@ public class Professor {
 		this.departamento = departamento;
 	}
 	
-	public ArrayList<Disciplina> getDisciplinas() {
+	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 

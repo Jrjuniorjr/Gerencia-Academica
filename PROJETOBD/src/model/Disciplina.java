@@ -1,7 +1,6 @@
 package model;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name="Disciplina")
 public class Disciplina {
@@ -32,20 +31,14 @@ public class Disciplina {
 	@ManyToOne(
 			fetch=FetchType.EAGER
 	)
-	@JoinColumn(name="matricula_prof")
+	@JoinColumn(name="num_matricula")
 	private Professor professor;
 	
-	
-	
-	//private String numMatricula;
-
-	//private ArrayList<Matricula> alunosCursando;
-	//private ArrayList<Matricula> historico;
-	
+		
 	
 	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,
 			int cargaHoraria, int credito,
-			String nomeDisciplina) {
+			String nomeDisciplina, Professor professor) {
 		super();
 		this.codigo = codigo;
 		this.numTotalHoras = numTotalHoras;
@@ -53,9 +46,13 @@ public class Disciplina {
 		this.cargaHoraria = cargaHoraria;
 		this.credito = credito;
 		this.nomeDisciplina = nomeDisciplina;
+		this.professor = professor;
 		
 	}
 
+	public Disciplina(){
+		
+	}
 
 	public String getCodigo() {
 		return codigo;

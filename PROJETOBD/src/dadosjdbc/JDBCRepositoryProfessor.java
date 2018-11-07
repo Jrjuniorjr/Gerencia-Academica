@@ -10,7 +10,7 @@ import model.Departamento;
 import model.Professor;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
-
+/*
 public class JDBCRepositoryProfessor implements IRepProfessor{
 	
 	@Override
@@ -138,3 +138,4 @@ public class JDBCRepositoryProfessor implements IRepProfessor{
 		return departamento;
 	}
 }
+*/

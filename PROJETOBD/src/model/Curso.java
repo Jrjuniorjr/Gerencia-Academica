@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class Curso {
 	private int numeroCreditoConclusao;
 	
 	@ManyToOne(fetch= FetchType.EAGER)
-	@Column(name="codigo_departamento")
+	@JoinColumn(name="codigo_departamento")
 	private Departamento departamento;
 	
 	
@@ -26,7 +27,7 @@ public class Curso {
 			mappedBy="curso",
 			fetch=FetchType.LAZY
 	)
-	private ArrayList<Matricula> matriculas = new ArrayList<>();
+	private List<Matricula> matriculas = new ArrayList<>();
 	
 	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
 		this.codigo = codigo;
@@ -72,11 +73,11 @@ public class Curso {
 		this.departamento = departamento;
 	}
 
-	public ArrayList<Matricula> getMatriculas() {
+	public List<Matricula> getMatriculas() {
 		return matriculas;
 	}
 
-	public void setMatriculas(ArrayList<Matricula> matriculas) {
+	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 	

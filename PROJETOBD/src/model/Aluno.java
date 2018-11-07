@@ -2,10 +2,8 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-//import org.hibernate.annotations.*;
 import javax.persistence.*;
 
 @Entity
@@ -37,8 +35,7 @@ public class Aluno {
 			mappedBy="aluno",
 			fetch = FetchType.LAZY
 	)
-	private ArrayList<Matricula> matriculas = new ArrayList<>();
-
+	private List<Matricula> matriculas = new ArrayList<>();
 	
 	
 	public Aluno(String cpf, String nome,
@@ -51,7 +48,7 @@ public class Aluno {
 		this.tipo = tipo;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
-		this.matriculas = new ArrayList<>();
+		//this.matriculas = new ArrayList<>();
 	}
 	
 	public Aluno(){
@@ -95,11 +92,11 @@ public class Aluno {
 		this.endereco = endereco;
 	}
 
-	public ArrayList<Matricula> getMatriculas() {
+	public List<Matricula> getMatriculas() {
 		return matriculas;
 	}
 
-	public void setMatriculas(ArrayList<Matricula> matriculas) {
+	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 	

@@ -10,7 +10,7 @@ import interfaces.IRepDepartamento;
 import model.*;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
-
+/*
 public class JDBCRepositoryDepartamento implements IRepDepartamento{
 	private Departamento d;
 	
@@ -112,7 +112,7 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 		}
 		/*for (Disciplina disciplina: d.getDisciplinas()){
 			disciplina.setDepartamento(d);
-		}*/
+		}
 		
 		
 	}
@@ -182,3 +182,4 @@ public class JDBCRepositoryDepartamento implements IRepDepartamento{
 	}
 
 }
+*/

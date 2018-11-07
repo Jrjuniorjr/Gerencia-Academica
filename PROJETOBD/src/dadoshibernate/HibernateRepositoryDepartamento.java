@@ -1,43 +1,50 @@
 package dadoshibernate;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
 
-import interfaces.IRepDepartamento;
-import model.Departamento;
+import model.*;
 import util.HibernateUtil;
 
+import interfaces.*;
 public class HibernateRepositoryDepartamento implements IRepDepartamento{
 
 	@Override
 	public void inserir(Departamento e) throws Exception {
-		Session sesion = HibernateUtil.getSession();
-		sesion.save(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.persist(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public void atualizar(Departamento e) throws Exception {
 		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		sesion.saveOrUpdate(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.merge(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public void remover(Departamento e) throws Exception {
-		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		sesion.remove(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.merge(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public Departamento procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		Departamento d = (Departamento) sesion.get(Departamento.class, key);
-		sesion.close();
-		return d;
+		Departamento departamento = null;
+		EntityManager entity = HibernateUtil.getEntityManager();
+		departamento = entity.find(Departamento.class, key);
+		entity.close();
+		return departamento;
+
 	}
 
 }

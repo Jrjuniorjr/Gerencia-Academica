@@ -1,8 +1,5 @@
-/Fachada.class
-/Main.class
-/controllers/
+/model/
+/META-INF/
+/util/
 /dadoshibernate/
 /dadosjdbc/
-/interfaces/
-/model/
-/util/

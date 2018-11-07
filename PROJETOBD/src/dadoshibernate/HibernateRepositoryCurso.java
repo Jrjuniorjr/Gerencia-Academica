@@ -1,5 +1,7 @@
 package dadoshibernate;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 
 import interfaces.IRepCurso;
@@ -10,33 +12,40 @@ public class HibernateRepositoryCurso implements IRepCurso{
 	
 	@Override
 	public void inserir(Curso e) throws Exception {
-		Session sesion = HibernateUtil.getSession();
-		sesion.save(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.persist(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public void atualizar(Curso e) throws Exception {
 		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		sesion.saveOrUpdate(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.merge(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public void remover(Curso e) throws Exception {
-		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		sesion.remove(e);
-		sesion.close();
+		EntityManager entity = HibernateUtil.getEntityManager();
+		entity.getTransaction().begin();
+		entity.merge(e);
+		entity.getTransaction().commit();
+		entity.close();
 	}
 
 	@Override
 	public Curso procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
-		Session sesion = HibernateUtil.getSession();
-		Curso curso = (Curso) sesion.get(Curso.class, key);
-		sesion.close();
+		Curso curso = null;
+		EntityManager entity = HibernateUtil.getEntityManager();
+		curso = entity.find(Curso.class, key);
+		entity.close();
 		return curso;
+
 	}
 }

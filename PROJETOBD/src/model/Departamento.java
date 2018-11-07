@@ -1,7 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -19,27 +19,28 @@ public class Departamento {
 			mappedBy="departamento",
 			fetch= FetchType.LAZY
 	)
-	private ArrayList<Professor> professores = new ArrayList<>();
+	private List<Professor> professores = new ArrayList<>();
 	
 	@OneToMany(
 			mappedBy="departamento",
 			fetch= FetchType.LAZY
 	)
-	private ArrayList<Curso> cursos = new ArrayList<>();
+	private List<Curso> cursos = new ArrayList<>();
+	
 	
 	@OneToMany(
 			mappedBy="departamento",
 			fetch=FetchType.LAZY
 	)
-	private ArrayList<Disciplina> disciplinas = new ArrayList<>();
+	private List<Disciplina> disciplinas = new ArrayList<>();
 	
 	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
 		this.nome = nome;
 		this.bloco = bloco;
-		professores = new ArrayList<>();
-		cursos = new ArrayList<>();
-		disciplinas = new ArrayList<>();
+	//	professores = new ArrayList<>();
+		//cursos = new ArrayList<>();
+		//disciplinas = new ArrayList<>();
 	}
 	
 	
@@ -47,12 +48,12 @@ public class Departamento {
 		
 	}
 	
-	public ArrayList<Disciplina> getDisciplinas() {
+	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
 
-	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 
@@ -76,30 +77,22 @@ public class Departamento {
 		this.bloco = bloco;
 	}
 
-	public ArrayList<Professor> getProfessores() {
+	public List<Professor> getProfessores() {
 		return professores;
 	}
 
-	public void setProfessores(ArrayList<Professor> professores) {
+	public void setProfessores(List<Professor> professores) {
 		this.professores = professores;
 	}
 
-	public ArrayList<Curso> getCursos() {
+	public List<Curso> getCursos() {
 		return cursos;
 	}
 
-	public void setCursos(ArrayList<Curso> cursos) {
+	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
 
-	/*public ArrayList<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}*/
-	
 	public void addProfessor(Professor professor){
 		professores.add(professor);
 	}
@@ -108,9 +101,9 @@ public class Departamento {
 		cursos.add(curso);
 	}
 	
-	/*public void addDisciplina(Disciplina disciplina){
+	public void addDisciplina(Disciplina disciplina){
 		disciplinas.add(disciplina);
-	}*/
+	}
 	
 	
 	
