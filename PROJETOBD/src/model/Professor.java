@@ -39,6 +39,7 @@ public class Professor {
 		this.cfe = cfe;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
+		this.departamento = departamento;
 		}
 	
 	public Professor(){

@@ -8,10 +8,10 @@ public class Main {
 		Fachada f = Fachada.getInstance();
 		try {
 			Departamento d = f.consultarDepartamento("EXT");
-			System.out.println("Nome: " + d.getNome() + "---Bloco" + d.getBloco());
+			System.out.println("Codigo: " + d.getCodigo() + "----Nome: " + d.getNome() + "---Bloco" + d.getBloco());
 			Curso curso = new Curso("M4", "MATEMATICA", 10, d);
-			f.inserirCurso(curso);
-			
+			Professor p = new Professor("4345","31235" , "Eu", "Eu", d);
+			f.inserirProfessor(p);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
