@@ -8,11 +8,17 @@ public class Fachada {
 	private ControllerProfessor controllerProfessor;
 	private ControllerDepartamento controllerDepartamento;
 	private ControllerCurso controllerCurso;
+	private ControllerDisciplina controllerDisciplina;
+	private ControllerAluno controllerAluno;
+	private ControllerMatricula controllerMatricula;
 	
 	private Fachada() {
 		this.controllerProfessor = new ControllerProfessor(new HibernateRepositoryProfessor());
 		this.controllerDepartamento = new ControllerDepartamento(new HibernateRepositoryDepartamento());
 		this.controllerCurso = new ControllerCurso(new HibernateRepositoryCurso());
+		this.controllerDisciplina = new ControllerDisciplina(new HibernateRepositoryDisciplina());
+		this.controllerAluno = new ControllerAluno(new HibernateRepositoryAluno());
+		this.controllerMatricula = new ControllerMatricula(new HibernateRepositoryMatricula());
 	}
 
 	public static Fachada getInstance() {
@@ -73,5 +79,56 @@ public class Fachada {
 	public void atualizarCurso(Curso curso) throws Exception {
 		this.controllerCurso.atualizar(curso);
 	}
+	
+	// OPERAÇÕES DE ALUNO
+	public void inserirAluno(Aluno aluno) throws Exception {
+		this.controllerAluno.inserir(aluno);
+	}
 
-}
+	public void removerAluno(Aluno aluno) throws Exception {
+		this.controllerAluno.remover(aluno);
+	}
+
+	public Aluno consultarAluno(String key) throws Exception {
+		return this.controllerAluno.consultar(key);
+	}
+
+	public void atualizarAluno(Aluno aluno) throws Exception {
+		this.controllerAluno.atualizar(aluno);
+	}
+	
+	// OPERAÇÕES DE Disciplina
+	public void inserirDisciplina(Disciplina disciplina) throws Exception {
+		this.controllerDisciplina.inserir(disciplina);
+	}
+
+	public void removerDisciplina(Disciplina disciplina) throws Exception {
+		this.controllerDisciplina.remover(disciplina);
+	}
+
+	public Disciplina consultarDisciplina(String key) throws Exception {
+		return this.controllerDisciplina.consultar(key);
+	}
+
+	public void atualizarDisciplina(Disciplina disciplina) throws Exception {
+		this.controllerDisciplina.atualizar(disciplina);
+	}
+	
+	//OPERAÇÕES DE MATRICULA
+	public void inserirMatricula(Matricula matricula) throws Exception {
+		this.controllerMatricula.inserir(matricula);
+	}
+
+	public void removerMatricula(Matricula matricula) throws Exception {
+		this.controllerMatricula.remover(matricula);
+	}
+
+	public Matricula consultarMatricula(String key) throws Exception {
+		return this.controllerMatricula.consultar(key);
+	}
+
+	public void atualizar(Matricula matricula) throws Exception {
+		this.controllerMatricula.atualizar(matricula);
+	}
+	
+	}

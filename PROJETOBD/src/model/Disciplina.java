@@ -25,7 +25,7 @@ public class Disciplina {
 	private int credito;
 
 	
-	@Column(name="nomeDisciplina")
+	@Column(name="nome_disciplina")
 	private String nomeDisciplina;
 
 	@ManyToOne(

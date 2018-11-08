@@ -1,5 +1,7 @@
 package interfaces;
 
-public interface IRepAluno {
+import model.*;
+
+public interface IRepAluno extends IRepGenerico<Aluno>{
 
 }

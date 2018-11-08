@@ -2,11 +2,11 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Endereco")
+@Table(name="Aluno_Endereco")
 public class Endereco {
 	
 	@Id
-	@Column(name="cpf_aluno")
+	@Column(name="cpf")
 	private String alunoCpf;
 	
 	@Column(name="CEP")
@@ -17,6 +17,15 @@ public class Endereco {
 	
 	@Column(name="bairro")
 	private String bairro;
+
+	
+	public Endereco(String alunoCpf, String cep, String rua, String bairro) {
+		super();
+		this.alunoCpf = alunoCpf;
+		this.cep = cep;
+		this.rua = rua;
+		this.bairro = bairro;
+	}
 
 	public Endereco() {
 		

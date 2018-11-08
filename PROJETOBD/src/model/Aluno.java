@@ -19,8 +19,9 @@ public class Aluno {
 	@Column(name="sobrenome")
 	private String sobrenome;
 	
-	@Column(name="tipoEntrada")
-	private Enum tipo;
+	@Enumerated
+	@Column(name="Tipo", columnDefinition="enum")
+	private TipoAluno tipoAluno;
 	
 	@Column(name="data_nascimento")
 	private Date dataNascimento;
@@ -39,13 +40,13 @@ public class Aluno {
 	
 	
 	public Aluno(String cpf, String nome,
-			String sobrenome, Enum tipo,
+			String sobrenome, TipoAluno tipoAluno,
 			Date dataNascimento, Endereco endereco) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.tipo = tipo;
+		this.tipoAluno = tipoAluno;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		//this.matriculas = new ArrayList<>();
@@ -73,11 +74,11 @@ public class Aluno {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public Enum getTipo() {
-		return tipo;
+	public TipoAluno getTipoAluno() {
+		return this.tipoAluno;
 	}
-	public void setTipo(Enum tipo) {
-		this.tipo = tipo;
+	public void setTipoAluno(TipoAluno tipoAluno) {
+		this.tipoAluno = tipoAluno;
 	}
 	public Date getDataNascimento() {
 		return dataNascimento;

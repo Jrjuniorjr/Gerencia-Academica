@@ -1,4 +1,6 @@
 
+import java.sql.Date;
+
 import model.*;
 public class Main {
 
@@ -9,9 +11,16 @@ public class Main {
 		try {
 			Departamento d = f.consultarDepartamento("EXT");
 			System.out.println("Codigo: " + d.getCodigo() + "----Nome: " + d.getNome() + "---Bloco" + d.getBloco());
-			Curso curso = new Curso("M4", "MATEMATICA", 10, d);
-			Professor p = new Professor("4345","31235" , "Eu", "Eu", d);
-			f.inserirProfessor(p);
+			Curso curso = f.consultarCurso("M4");
+			System.out.println("Nome: " +curso.getNomeCurso());
+			Professor p = f.consultarProfessor("4345");
+			System.out.println("Matricula: " + p.getMatricula() + "----Nome:" + p.getNome());
+			Disciplina disciplina = f.consultarDisciplina("INF0207");
+			System.out.println("Nome: " + disciplina.getNomeDisciplina());
+			Aluno aluno = f.consultarAluno("4234355"); 
+			System.out.println("Nome Aluno: " + aluno.getNome());
+			Matricula matricula = new Matricula(aluno, curso, "4224343534", new Date(2009, 01, 14));
+			f.inserirMatricula(matricula);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
