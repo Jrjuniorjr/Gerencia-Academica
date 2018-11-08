@@ -25,7 +25,7 @@ public class Matricula {
 	private Curso curso;
 	
 	@Id
-	@Column(name="matricula")
+	@Column(name="num_matricula")
 	private String matricula;
 	
 	@Column(name="data_inicio")

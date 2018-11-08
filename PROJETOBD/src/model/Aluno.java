@@ -19,8 +19,8 @@ public class Aluno {
 	@Column(name="sobrenome")
 	private String sobrenome;
 	
-	@Enumerated
-	@Column(name="Tipo", columnDefinition="enum")
+	@Enumerated(EnumType.STRING)
+	@Column(name="Tipo", columnDefinition="enum('Vestibular','Transferencia')")
 	private TipoAluno tipoAluno;
 	
 	@Column(name="data_nascimento")
