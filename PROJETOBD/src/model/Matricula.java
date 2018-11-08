@@ -32,12 +32,18 @@ public class Matricula {
 	private Date dataInicio;
 	
 	
-	public Matricula(Aluno aluno, Curso curso, String matricula, Date dataInicio) {
+	@Enumerated(EnumType.STRING)
+	@Column(name="Tipo", columnDefinition="enum('Ativo', 'Inativo')")
+	private StatusMatriculaEnum statusMatricula;
+	
+	public Matricula(Aluno aluno, Curso curso, String matricula, Date dataInicio,
+			StatusMatriculaEnum statusMatricula) {
 		super();
 		this.aluno = aluno;
 		this.curso = curso;
 		this.matricula = matricula;
 		this.dataInicio = dataInicio;
+		this.statusMatricula = statusMatricula;
 	}
 	
 	public Matricula(){
@@ -68,6 +74,15 @@ public class Matricula {
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+
+	public StatusMatriculaEnum getStatusMatricula() {
+		return statusMatricula;
+	}
+
+	public void setStatusMatricula(StatusMatriculaEnum statusMatricula) {
+		this.statusMatricula = statusMatricula;
+	}
+	
 	
 	
 }

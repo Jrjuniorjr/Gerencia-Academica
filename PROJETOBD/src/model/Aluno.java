@@ -21,7 +21,7 @@ public class Aluno {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="Tipo", columnDefinition="enum('Vestibular','Transferencia')")
-	private TipoAluno tipoAluno;
+	private TipoAlunoEnum tipoAluno;
 	
 	@Column(name="data_nascimento")
 	private Date dataNascimento;
@@ -40,7 +40,7 @@ public class Aluno {
 	
 	
 	public Aluno(String cpf, String nome,
-			String sobrenome, TipoAluno tipoAluno,
+			String sobrenome, TipoAlunoEnum tipoAluno,
 			Date dataNascimento, Endereco endereco) {
 		super();
 		this.cpf = cpf;
@@ -74,10 +74,10 @@ public class Aluno {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public TipoAluno getTipoAluno() {
+	public TipoAlunoEnum getTipoAluno() {
 		return this.tipoAluno;
 	}
-	public void setTipoAluno(TipoAluno tipoAluno) {
+	public void setTipoAluno(TipoAlunoEnum tipoAluno) {
 		this.tipoAluno = tipoAluno;
 	}
 	public Date getDataNascimento() {

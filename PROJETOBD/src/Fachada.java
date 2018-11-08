@@ -127,7 +127,7 @@ public class Fachada {
 		return this.controllerMatricula.consultar(key);
 	}
 
-	public void atualizar(Matricula matricula) throws Exception {
+	public void atualizarMatricula(Matricula matricula) throws Exception {
 		this.controllerMatricula.atualizar(matricula);
 	}
 	

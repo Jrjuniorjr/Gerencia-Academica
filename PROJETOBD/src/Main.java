@@ -19,8 +19,9 @@ public class Main {
 			System.out.println("Nome: " + disciplina.getNomeDisciplina());
 			Aluno aluno = f.consultarAluno("4234355"); 
 			System.out.println("Nome Aluno: " + aluno.getNome());
-			Matricula matricula = new Matricula(aluno, curso, "4224343534", new Date(2009, 01, 14));
-			f.inserirMatricula(matricula);
+			Matricula matricula = new Matricula(aluno, curso, "4224343534", new Date(2009, 01, 14),
+					StatusMatriculaEnum.Ativo);
+			f.atualizarMatricula(matricula);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
