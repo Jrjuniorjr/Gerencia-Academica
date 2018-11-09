@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import interfaces.IRepDisciplinasPeriodoAtual;
+import interfaces.*;
 import model.*;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
@@ -22,8 +22,8 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 			if(e != null){
 				stmt.setString(1, e.getMatriculaAluno());
 				stmt.setString(2, e.getCodigoDisciplina());
-				stmt.setDouble(3, e.getNotaFinal());
-				stmt.setDate(4, e.getDataCursada());
+				stmt.setDouble(3, e.getPrimeiroGQ());
+				stmt.setDouble(4, e.getSegundoGQ());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
@@ -35,18 +35,18 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 	}
 
 	@Override
-	public void atualizar(HistoricoEscolar e) throws Exception {
+	public void atualizar(DisciplinasPeriodoAtual e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.atualizar");
+		String sql = SQLUtil.getProperties().getProperty("sql.cursando.atualizar");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
 				stmt.setString(1, e.getMatriculaAluno());
 				stmt.setString(2, e.getCodigoDisciplina());
-				stmt.setDouble(3, e.getNotaFinal());
-				stmt.setDate(4, e.getDataCursada());
+				stmt.setDouble(3, e.getPrimeiroGQ());
+				stmt.setDouble(4, e.getSegundoGQ());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
 				stmt.executeUpdate();
 				stmt.close();
@@ -58,10 +58,10 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 	}
 
 	@Override
-	public void remover(HistoricoEscolar e) throws Exception {
+	public void remover(DisciplinasPeriodoAtual e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.historico.remover");
+		String sql = SQLUtil.getProperties().getProperty("sql.cursando.remover");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
@@ -78,29 +78,29 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 	}
 
 	@Override
-	public HistoricoEscolar procurar(String key) throws Exception {
+	public DisciplinasPeriodoAtual procurar(String key) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
 		ResultSet rs;
-		HistoricoEscolar historicoEscolar = null;
-		String sql = SQLUtil.getProperties().getProperty("sql.historico.procurar");
+		DisciplinasPeriodoAtual disciplinasPeriodoAtual = null;
+		String sql = SQLUtil.getProperties().getProperty("sql.cursando.procurar");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, key);
 			rs = stmt.executeQuery();
 			rs.next();
-			historicoEscolar = new HistoricoEscolar();
-			historicoEscolar.setMatriculaAluno(rs.getString("num_matricula"));
-			historicoEscolar.setCodigoDisciplina(rs.getString("codigo_disciplina"));
-			historicoEscolar.setNotaFinal(rs.getDouble("nota_final"));
-			historicoEscolar.setDataCursada(rs.getDate("data_cursada"));
+			disciplinasPeriodoAtual = new DisciplinasPeriodoAtual();
+			disciplinasPeriodoAtual.setMatriculaAluno(rs.getString("matricula"));
+			disciplinasPeriodoAtual.setCodigoDisciplina(rs.getString("codigo_disciplina"));
+			disciplinasPeriodoAtual.setPrimeiroGQ(rs.getDouble("primeiro_gq"));
+			disciplinasPeriodoAtual.setSegundoGQ(rs.getDouble("segundo_gq"));
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){
 			throw ex;
 		}
-		return historicoEscolar;
+		return disciplinasPeriodoAtual;
 	}
 
 }

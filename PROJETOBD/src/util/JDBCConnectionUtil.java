@@ -30,7 +30,7 @@ public class JDBCConnectionUtil {
 		pass = properties.getProperty("jdbc.pass");
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(driver);
 			con = DriverManager.getConnection(url, userName, pass);
 
 		} catch (ClassNotFoundException e) {
@@ -43,15 +43,17 @@ public class JDBCConnectionUtil {
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		if (con == null || con.isClosed()) {
-			openFile();
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url, userName, pass);
+			if (properties == null) {
+				openFile();
+			}
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mydb", "root", "MySql.321#");
 		}
 		return con;
 	}
 
 	private static void openFile() {
-		if (properties == null || driver == null || userName == null || url == null ) {
+		if (properties == null || driver == null || userName == null || url == null) {
 			properties = new Properties();
 			try {
 				properties.load(new FileInputStream("PropertiesJDBC.properties"));
@@ -62,7 +64,7 @@ public class JDBCConnectionUtil {
 			}
 			driver = properties.getProperty("jdbc.driver");
 			url = properties.getProperty("jdbc.url");
-			userName =properties.getProperty("jdbc.user");
+			userName = properties.getProperty("jdbc.user");
 			pass = properties.getProperty("jdbc.pass");
 		}
 	}

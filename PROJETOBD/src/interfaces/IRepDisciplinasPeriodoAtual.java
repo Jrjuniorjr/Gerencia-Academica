@@ -1,5 +1,7 @@
 package interfaces;
 
-public interface IRepDisciplinasPeriodoAtual extends IRepGenerico<IRepDisciplinasPeriodoAtual>{
+import model.*;
+
+public interface IRepDisciplinasPeriodoAtual extends IRepGenerico<DisciplinasPeriodoAtual>{
 
 }

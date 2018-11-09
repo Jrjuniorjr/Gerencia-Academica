@@ -11,7 +11,9 @@ public class Fachada {
 	private ControllerDisciplina controllerDisciplina;
 	private ControllerAluno controllerAluno;
 	private ControllerMatricula controllerMatricula;
-	
+	private ControllerHistoricoEscolar controllerHistoricoEscolar;
+	private ControllerDisciplinasPeriodoAtual controllerDisciplinasPeriodoAtual;
+
 	private Fachada() {
 		this.controllerProfessor = new ControllerProfessor(new HibernateRepositoryProfessor());
 		this.controllerDepartamento = new ControllerDepartamento(new HibernateRepositoryDepartamento());
@@ -19,6 +21,9 @@ public class Fachada {
 		this.controllerDisciplina = new ControllerDisciplina(new HibernateRepositoryDisciplina());
 		this.controllerAluno = new ControllerAluno(new HibernateRepositoryAluno());
 		this.controllerMatricula = new ControllerMatricula(new HibernateRepositoryMatricula());
+		this.controllerHistoricoEscolar = new ControllerHistoricoEscolar(new JDBCRepositoryHistoricoEscolar());
+		this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(
+				new JDBCRepositoryDisciplinasPeriodoAtual());
 	}
 
 	public static Fachada getInstance() {
@@ -27,7 +32,7 @@ public class Fachada {
 		}
 		return instancia;
 	}
-	
+
 	// OPERAÇÕES DE PROFESSOR
 	public void inserirProfessor(Professor professor) throws Exception {
 		this.controllerProfessor.inserir(professor);
@@ -44,7 +49,7 @@ public class Fachada {
 	public void atualizarProfessor(Professor professor) throws Exception {
 		this.controllerProfessor.atualizar(professor);
 	}
-	
+
 	// OPERAÇÕES DE Departamento
 	public void inserirDepartamento(Departamento departamento) throws Exception {
 		this.controllerDepartamento.inserir(departamento);
@@ -61,7 +66,6 @@ public class Fachada {
 	public void atualizarDepartamento(Departamento departamento) throws Exception {
 		this.controllerDepartamento.atualizar(departamento);
 	}
-	
 
 	// OPERAÇÕES DE Curso
 	public void inserirCurso(Curso curso) throws Exception {
@@ -79,7 +83,7 @@ public class Fachada {
 	public void atualizarCurso(Curso curso) throws Exception {
 		this.controllerCurso.atualizar(curso);
 	}
-	
+
 	// OPERAÇÕES DE ALUNO
 	public void inserirAluno(Aluno aluno) throws Exception {
 		this.controllerAluno.inserir(aluno);
@@ -96,7 +100,7 @@ public class Fachada {
 	public void atualizarAluno(Aluno aluno) throws Exception {
 		this.controllerAluno.atualizar(aluno);
 	}
-	
+
 	// OPERAÇÕES DE Disciplina
 	public void inserirDisciplina(Disciplina disciplina) throws Exception {
 		this.controllerDisciplina.inserir(disciplina);
@@ -113,8 +117,8 @@ public class Fachada {
 	public void atualizarDisciplina(Disciplina disciplina) throws Exception {
 		this.controllerDisciplina.atualizar(disciplina);
 	}
-	
-	//OPERAÇÕES DE MATRICULA
+
+	// OPERAÇÕES DE MATRICULA
 	public void inserirMatricula(Matricula matricula) throws Exception {
 		this.controllerMatricula.inserir(matricula);
 	}
@@ -130,5 +134,39 @@ public class Fachada {
 	public void atualizarMatricula(Matricula matricula) throws Exception {
 		this.controllerMatricula.atualizar(matricula);
 	}
-	
+
+	// OPERAÇÕES DE HISTORICO ESCOLAR
+	public void inserirHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
+		this.controllerHistoricoEscolar.inserir(historicoEscolar);
 	}
+
+	public void removerHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
+		this.controllerHistoricoEscolar.remover(historicoEscolar);
+	}
+
+	public HistoricoEscolar consultarHistoricoEscolar(String key) throws Exception {
+		return this.controllerHistoricoEscolar.consultar(key);
+	}
+
+	public void atualizarHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
+		this.controllerHistoricoEscolar.atualizar(historicoEscolar);
+	}
+
+	// OPERAÇÕES DE DISCIPLINAS DO PERIODO ATUAL
+	public void inserirDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
+		this.controllerDisciplinasPeriodoAtual.inserir(disciplinasPeriodoAtual);
+	}
+
+	public void removerDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
+		this.controllerDisciplinasPeriodoAtual.remover(disciplinasPeriodoAtual);
+	}
+
+	public DisciplinasPeriodoAtual consultarDisciplinasPeriodoAtual(String key) throws Exception {
+		return this.controllerDisciplinasPeriodoAtual.consultar(key);
+	}
+
+	public void atualizarDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
+		this.controllerDisciplinasPeriodoAtual.atualizar(disciplinasPeriodoAtual);
+	}
+
+}

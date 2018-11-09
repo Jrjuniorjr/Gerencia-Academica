@@ -34,7 +34,7 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 	public void atualizar(HistoricoEscolar e) throws Exception {
 		Connection con;
 		PreparedStatement stmt;
-		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.atualizar");
+		String sql = SQLUtil.getProperties().getProperty("sql.historico.atualizar");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);

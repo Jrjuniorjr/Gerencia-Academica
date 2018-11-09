@@ -19,9 +19,12 @@ public class Main {
 			System.out.println("Nome: " + disciplina.getNomeDisciplina());
 			Aluno aluno = f.consultarAluno("4234355"); 
 			System.out.println("Nome Aluno: " + aluno.getNome());
-			Matricula matricula = new Matricula(aluno, curso, "4224343534", new Date(2009, 01, 14),
-					StatusMatriculaEnum.Ativo);
-			f.atualizarMatricula(matricula);
+			Matricula matricula = f.consultarMatricula("4224343534");
+			System.out.println("MAtricula: " + matricula.getMatricula() + "-----Data de inserção: " + matricula.getDataInicio());
+			DisciplinasPeriodoAtual dpa = new DisciplinasPeriodoAtual(10.0, 9.0, matricula.getMatricula(), disciplina.getCodigo());
+			f.inserirDisciplinasPeriodoAtual(dpa);
+			//DisciplinasPeriodoAtual dpa = f.consultarDisciplinasPeriodoAtual("123456888");
+			//System.out.println(dpa.getMatriculaAluno() + "---" + dpa.getCodigoDisciplina() + "---" + dpa.getPrimeiroGQ());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

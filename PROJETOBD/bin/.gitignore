@@ -1,5 +1,2 @@
-/model/
-/META-INF/
-/dadoshibernate/
-/interfaces/
-/controllers/
+/util/
+/dadosjdbc/
