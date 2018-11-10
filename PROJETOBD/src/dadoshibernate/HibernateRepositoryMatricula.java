@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.*;
 import util.HibernateUtil;
+import util.SQLUtil;
 import interfaces.*;
 
 public class HibernateRepositoryMatricula implements IRepMatricula{
@@ -40,8 +41,11 @@ public class HibernateRepositoryMatricula implements IRepMatricula{
 	public Matricula procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
 		Matricula matricula = null;
+		String sql = SQLUtil.getProperties().getProperty("sql.matricula.procurar");
 		EntityManager entity = HibernateUtil.getEntityManager();
-		matricula = entity.find(Matricula.class, key);
+		matricula = entity.createQuery(sql, Matricula.class).
+				setParameter("x", key).
+				getSingleResult();
 		entity.close();
 		return matricula;
 

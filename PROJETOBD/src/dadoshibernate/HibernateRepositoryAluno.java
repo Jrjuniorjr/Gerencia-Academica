@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.*;
 import util.HibernateUtil;
+import util.SQLUtil;
 import interfaces.*;
 
 public class HibernateRepositoryAluno implements IRepAluno{
@@ -39,8 +40,11 @@ public class HibernateRepositoryAluno implements IRepAluno{
 	public Aluno procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
 		Aluno aluno = null;
+		String sql = SQLUtil.getProperties().getProperty("sql.aluno.procurar");
 		EntityManager entity = HibernateUtil.getEntityManager();
-		aluno = entity.find(Aluno.class, key);
+		aluno = entity.createQuery(sql, Aluno.class).
+				setParameter("x", key).
+				getSingleResult();
 		entity.close();
 		return aluno;
 

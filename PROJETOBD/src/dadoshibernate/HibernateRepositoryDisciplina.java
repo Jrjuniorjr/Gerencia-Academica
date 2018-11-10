@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import interfaces.*;
 import model.*;
 import util.HibernateUtil;
+import util.SQLUtil;
 
 public class HibernateRepositoryDisciplina implements IRepDisciplina{
 	@Override
@@ -39,8 +40,11 @@ public class HibernateRepositoryDisciplina implements IRepDisciplina{
 	public Disciplina procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
 		Disciplina disciplina = null;
+		String sql = SQLUtil.getProperties().getProperty("sql.disciplina.procurar");
 		EntityManager entity = HibernateUtil.getEntityManager();
-		disciplina = entity.find(Disciplina.class, key);
+		disciplina = entity.createQuery(sql, Disciplina.class).
+				setParameter("x", key).
+				getSingleResult();
 		entity.close();
 		return disciplina;
 

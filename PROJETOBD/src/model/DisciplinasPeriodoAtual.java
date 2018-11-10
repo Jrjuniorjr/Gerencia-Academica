@@ -2,17 +2,16 @@ package model;
 
 public class DisciplinasPeriodoAtual {
 	private int id;
-	private String matriculaAluno;
-	private String codigoDisciplina;
+	private int idMatricula;
+	private int idDisciplina;
 	private double primeiroGQ;
 	private double segundoGQ;
 
-	public DisciplinasPeriodoAtual(int id, String matriculaAluno, String codigoDisciplina, double primeiroGQ,
+	public DisciplinasPeriodoAtual(int idMatricula, int idDisciplina, double primeiroGQ,
 			double segundoGQ) {
 		super();
-		this.id = id;
-		this.matriculaAluno = matriculaAluno;
-		this.codigoDisciplina = codigoDisciplina;
+		this.idMatricula = idMatricula;
+		this.idDisciplina = idDisciplina;
 		this.primeiroGQ = primeiroGQ;
 		this.segundoGQ = segundoGQ;
 	}
@@ -49,18 +48,31 @@ public class DisciplinasPeriodoAtual {
 	public void setSegundoGQ(double segundoGQ) {
 		this.segundoGQ = segundoGQ;
 	}
-	public String getMatriculaAluno() {
-		return matriculaAluno;
+
+
+
+	public int getIdMatricula() {
+		return idMatricula;
 	}
-	public void setMatriculaAluno(String matriculaAluno) {
-		this.matriculaAluno = matriculaAluno;
+
+
+
+	public void setIdMatricula(int idMatricula) {
+		this.idMatricula = idMatricula;
 	}
-	public String getCodigoDisciplina() {
-		return codigoDisciplina;
+
+
+
+	public int getIdDisciplina() {
+		return idDisciplina;
 	}
-	public void setCodigoDisciplina(String codigoDisciplina) {
-		this.codigoDisciplina = codigoDisciplina;
+
+
+
+	public void setIdDisciplina(int idDisciplina) {
+		this.idDisciplina = idDisciplina;
 	}
+	
 
 	
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name="Aluno")
 public class Aluno {
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
@@ -24,10 +24,10 @@ public class Aluno {
 	private String sobrenome;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="Tipo", columnDefinition="enum('Vestibular','Transferencia')")
+	@Column(name="tipo", columnDefinition="enum('Vestibular','Transferencia')")
 	private TipoAlunoEnum tipoAluno;
 	
-	@Column(name="data_nascimento")
+	@Column(name="dataNascimento")
 	private Date dataNascimento;
 	
 	@OneToOne(cascade=
@@ -43,11 +43,10 @@ public class Aluno {
 	private List<Matricula> matriculas = new ArrayList<>();
 	
 	
-	public Aluno(int id, String cpf, String nome,
+	public Aluno(String cpf, String nome,
 			String sobrenome, TipoAlunoEnum tipoAluno,
 			Date dataNascimento, Endereco endereco) {
 		super();
-		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;

@@ -9,21 +9,21 @@ import javax.persistence.*;
 @Table(name="Curso")
 public class Curso {
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="codigo")
+	@Column(name="codigo", unique=true)
 	private String codigo;
 	
-	@Column(name="nome_curso")
+	@Column(name="nomeCurso")
 	private String nomeCurso;
 	
-	@Column(name="num_credito_conclusao")
+	@Column(name="numeroCreditoConclusao")
 	private int numeroCreditoConclusao;
 	
 	@ManyToOne(fetch= FetchType.EAGER)
-	@JoinColumn(name="codigo_departamento")
+	@JoinColumn(name="idDepartamento")
 	private Departamento departamento;
 	
 	
@@ -33,8 +33,7 @@ public class Curso {
 	)
 	private List<Matricula> matriculas = new ArrayList<>();
 	
-	public Curso(int id, String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
-		this.id = id;
+	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
 		this.codigo = codigo;
 		this.nomeCurso = nomeCurso;
 		this.numeroCreditoConclusao = numeroCreditoConclusao;

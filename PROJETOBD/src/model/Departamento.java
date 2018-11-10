@@ -9,11 +9,11 @@ import javax.persistence.*;
 public class Departamento {
 	
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="codigo")
+	@Column(name="codigo", unique=true)
 	private String codigo;
 	@Column(name="nome")
 	private String nome;
@@ -39,8 +39,7 @@ public class Departamento {
 	)
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
-	public Departamento(int id, String codigo, String nome, char bloco){
-		this.id = id;
+	public Departamento(String codigo, String nome, char bloco){
 		this.codigo = codigo;
 		this.nome = nome;
 		this.bloco = bloco;

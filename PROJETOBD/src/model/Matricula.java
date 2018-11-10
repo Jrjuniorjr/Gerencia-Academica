@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Matricula {
 	
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
@@ -18,7 +18,7 @@ public class Matricula {
 			fetch=FetchType.EAGER
 	)
 	@JoinColumn(
-			name="aluno_cpf"
+			name="idAluno"
 	)
 	private Aluno aluno;
 	
@@ -27,28 +27,27 @@ public class Matricula {
 			fetch=FetchType.EAGER
 	)
 	@JoinColumn(
-			name="codigo_curso"
+			name="idCurso"
 	)
 	private Curso curso;
 	
-	@Column(name="num_matricula")
+	@Column(name="numeroMatricula")
 	private String matricula;
 	
-	@Column(name="data_inicio")
+	@Column(name="dataInicio")
 	private Date dataInicio;
 	
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="Tipo", columnDefinition="enum('Ativo', 'Inativo')")
+	@Column(name="tipo", columnDefinition="enum('Ativo', 'Inativo')")
 	private StatusMatriculaEnum statusMatricula;
 	
-	public Matricula(int id, Aluno aluno, Curso curso, Date dataInicio,
+	public Matricula(String matricula, Aluno aluno, Curso curso, Date dataInicio,
 			StatusMatriculaEnum statusMatricula) {
 		super();
-		this.id = id;
 		this.aluno = aluno;
 		this.curso = curso;
-		this.matricula = this.gerarMatricula();
+		this.matricula = matricula;
 		this.dataInicio = dataInicio;
 		this.statusMatricula = statusMatricula;
 	}
@@ -57,7 +56,7 @@ public class Matricula {
 		
 	}
 	
-	public String gerarMatricula() {
+	/*public String gerarMatricula() {
 		Calendar cal = Calendar.getInstance();
 		String matriculaGerada;
 		
@@ -69,7 +68,7 @@ public class Matricula {
 	}
 	
 	
-
+*/
 	public int getId() {
 		return id;
 	}

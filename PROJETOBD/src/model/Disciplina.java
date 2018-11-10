@@ -6,45 +6,44 @@ import javax.persistence.*;
 public class Disciplina {
 
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="codigo")
+	@Column(name="codigo", unique=true)
 	private String codigo;
 
-	@Column(name="num_total_horas")
+	@Column(name="numeroTotalHoras")
 	private int numTotalHoras;
 
 	@ManyToOne(
 			fetch=FetchType.EAGER
 	)
-	@JoinColumn(name="codigo_departamento")
+	@JoinColumn(name="idDepartamento")
 	private Departamento departamento;
 
-	@Column(name="carga_horaria")
+	@Column(name="cargaHoraria")
 	private int cargaHoraria;
 
 	@Column(name="credito")
 	private int credito;
 
 	
-	@Column(name="nome_disciplina")
+	@Column(name="nomeDisciplina")
 	private String nomeDisciplina;
 
 	@ManyToOne(
 			fetch=FetchType.EAGER
 	)
-	@JoinColumn(name="num_matricula")
+	@JoinColumn(name="idProfessor")
 	private Professor professor;
 	
 		
 	
-	public Disciplina(int id, String codigo, int numTotalHoras, Departamento departamento,
+	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,
 			int cargaHoraria, int credito,
 			String nomeDisciplina, Professor professor) {
 		super();
-		this.id = id;
 		this.codigo = codigo;
 		this.numTotalHoras = numTotalHoras;
 		this.departamento = departamento;

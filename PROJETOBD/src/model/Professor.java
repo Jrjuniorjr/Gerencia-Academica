@@ -13,24 +13,24 @@ import javax.persistence.*;
 public class Professor {
 
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="matricula_prof")
+	@Column(name="matriculaProfessor")
 	private String matricula;
 	
 	@Column(name="CFE")
 	private String cfe;
 	
-	@Column(name="Nome")
+	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="Sobrenome")
+	@Column(name="sobrenome")
 	private String sobrenome;
 	
 	@ManyToOne(fetch= FetchType.EAGER)
-	@JoinColumn(name="codigo_departamento")
+	@JoinColumn(name="idDepartamento")
 	private Departamento departamento;
 	
 	@OneToMany(
@@ -39,8 +39,7 @@ public class Professor {
 	)
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
-	public Professor(int id, String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
-		this.id = id;
+	public Professor(String matricula, String cfe, String nome, String sobrenome, Departamento departamento) {
 		this.matricula = matricula;
 		this.cfe = cfe;
 		this.nome = nome;

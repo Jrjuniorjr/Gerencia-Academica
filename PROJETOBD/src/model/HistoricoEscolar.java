@@ -4,17 +4,16 @@ import java.sql.Date;
 
 public class HistoricoEscolar {
 	private int id;
-	private String matriculaAluno;
-	private String codigoDisciplina;
+	private int idMatricula;
+	private int idDisciplina;
 	private double notaFinal;
 	private Date dataCursada;
 	
-	public HistoricoEscolar(int id, String matriculaAluno, String codigoDisciplina, double notaFinal,
+	public HistoricoEscolar(int idMatricula, int idDisciplina, double notaFinal,
 			Date dataCursada) {
 		super();
-		this.id = id;
-		this.matriculaAluno = matriculaAluno;
-		this.codigoDisciplina = codigoDisciplina;
+		this.idMatricula = idMatricula;
+		this.idDisciplina = idDisciplina;
 		this.notaFinal = notaFinal;
 		this.dataCursada = dataCursada;
 	}
@@ -49,22 +48,23 @@ public class HistoricoEscolar {
 		this.dataCursada = dataCursada;
 	}
 
-	public String getMatriculaAluno() {
-		return matriculaAluno;
+	public int getIdMatricula() {
+		return idMatricula;
 	}
 
-	public void setMatriculaAluno(String matriculaAluno) {
-		this.matriculaAluno = matriculaAluno;
+	public void setIdMatricula(int idMatricula) {
+		this.idMatricula = idMatricula;
 	}
 
-	public String getCodigoDisciplina() {
-		return codigoDisciplina;
+	public int getIdDisciplina() {
+		return idDisciplina;
 	}
 
-	public void setCodigoDisciplina(String codigoDisciplina) {
-		this.codigoDisciplina = codigoDisciplina;
+	public void setIdDisciplina(int idDisciplina) {
+		this.idDisciplina = idDisciplina;
 	}
-	
+
+
 	
 	
 	

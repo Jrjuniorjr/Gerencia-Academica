@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.*;
 import util.HibernateUtil;
-
+import util.SQLUtil;
 import interfaces.*;
 
 public class HibernateRepositoryProfessor implements IRepProfessor{
@@ -40,9 +40,11 @@ public class HibernateRepositoryProfessor implements IRepProfessor{
 	@Override
 	public Professor procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
+		String sql = SQLUtil.getProperties().getProperty("sql.professor.procurar");
 		Professor professor = null;
 		EntityManager entity = HibernateUtil.getEntityManager();
-		professor = entity.find(Professor.class, key);
+		professor = entity.createQuery(sql, Professor.class).
+				setParameter("x", key).getSingleResult();
 		entity.close();
 		return professor;
 	}

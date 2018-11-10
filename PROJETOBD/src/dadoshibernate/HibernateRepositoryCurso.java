@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import interfaces.IRepCurso;
 import util.HibernateUtil;
+import util.SQLUtil;
 import model.*;
 
 public class HibernateRepositoryCurso implements IRepCurso{
@@ -41,9 +42,10 @@ public class HibernateRepositoryCurso implements IRepCurso{
 	@Override
 	public Curso procurar(String key) throws Exception {
 		// TODO Auto-generated method stub
+		String sql = SQLUtil.getProperties().getProperty("sql.curso.procurar");
 		Curso curso = null;
 		EntityManager entity = HibernateUtil.getEntityManager();
-		curso = entity.find(Curso.class, key);
+		curso = entity.createQuery(sql, Curso.class).setParameter("x", key).getSingleResult();
 		entity.close();
 		return curso;
 

@@ -6,6 +6,7 @@ import interfaces.IRepHistoricoEscolar;
 import model.*;
 import util.*;
 
+/*
 public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 	@Override
 	public void inserir(HistoricoEscolar e) throws Exception {
@@ -100,3 +101,4 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 	}
 
 }
+*/

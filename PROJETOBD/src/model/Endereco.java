@@ -6,13 +6,14 @@ import javax.persistence.*;
 public class Endereco {
 	
 	@Id 
-	@Column (name = "Id")
+	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
-	@Column(name="cpf")
-	private String alunoCpf;
+	//OBSERVAÇÃO
+	@Column(name="cpfAluno")
+	private String cpfAluno;
+	//private int idAluno;
 	
 	@Column(name="CEP")
 	private String cep;
@@ -24,10 +25,9 @@ public class Endereco {
 	private String bairro;
 
 	
-	public Endereco(int id, String alunoCpf, String cep, String rua, String bairro) {
+	public Endereco(String cpfAluno, String cep, String rua, String bairro) {
 		super();
-		this.id = id;
-		this.alunoCpf = alunoCpf;
+		this.cpfAluno = cpfAluno;
 		this.cep = cep;
 		this.rua = rua;
 		this.bairro = bairro;
@@ -47,14 +47,24 @@ public class Endereco {
 		this.id = id;
 	}
 
-	public String getAlunoCpf() {
-		return alunoCpf;
+
+
+	/*public int getIdAluno() {
+		return idAluno;
 	}
 
-	public void setAlunoCpf(String alunoCpf) {
-		this.alunoCpf = alunoCpf;
+	public void setIdAluno(int idAluno) {
+		this.idAluno = idAluno;
+	}*/
+
+	public String getCpfAluno() {
+		return cpfAluno;
 	}
 
+	public void setCpfAluno(String cpfAluno) {
+		this.cpfAluno = cpfAluno;
+	}
+	
 	public String getCep() {
 		return cep;
 	}

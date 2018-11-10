@@ -21,9 +21,8 @@ public class Fachada {
 		this.controllerDisciplina = new ControllerDisciplina(new HibernateRepositoryDisciplina());
 		this.controllerAluno = new ControllerAluno(new HibernateRepositoryAluno());
 		this.controllerMatricula = new ControllerMatricula(new HibernateRepositoryMatricula());
-		this.controllerHistoricoEscolar = new ControllerHistoricoEscolar(new JDBCRepositoryHistoricoEscolar());
-		this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(
-				new JDBCRepositoryDisciplinasPeriodoAtual());
+		//.controllerHistoricoEscolar = new ControllerHistoricoEscolar(new JDBCRepositoryHistoricoEscolar());
+		//this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(new JDBCRepositoryDisciplinasPeriodoAtual());
 	}
 
 	public static Fachada getInstance() {
