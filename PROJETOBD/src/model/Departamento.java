@@ -7,7 +7,12 @@ import javax.persistence.*;
 @Entity
 @Table(name="Departamento")
 public class Departamento {
-	@Id
+	
+	@Id 
+	@Column (name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@Column(name="codigo")
 	private String codigo;
 	@Column(name="nome")
@@ -34,7 +39,8 @@ public class Departamento {
 	)
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
-	public Departamento(String codigo, String nome, char bloco){
+	public Departamento(int id, String codigo, String nome, char bloco){
+		this.id = id;
 		this.codigo = codigo;
 		this.nome = nome;
 		this.bloco = bloco;
@@ -48,6 +54,17 @@ public class Departamento {
 		
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}

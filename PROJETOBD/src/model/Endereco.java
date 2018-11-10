@@ -5,7 +5,12 @@ import javax.persistence.*;
 @Table(name="Aluno_Endereco")
 public class Endereco {
 	
-	@Id
+	@Id 
+	@Column (name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	
 	@Column(name="cpf")
 	private String alunoCpf;
 	
@@ -19,8 +24,9 @@ public class Endereco {
 	private String bairro;
 
 	
-	public Endereco(String alunoCpf, String cep, String rua, String bairro) {
+	public Endereco(int id, String alunoCpf, String cep, String rua, String bairro) {
 		super();
+		this.id = id;
 		this.alunoCpf = alunoCpf;
 		this.cep = cep;
 		this.rua = rua;
@@ -31,6 +37,16 @@ public class Endereco {
 		
 	}
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getAlunoCpf() {
 		return alunoCpf;
 	}

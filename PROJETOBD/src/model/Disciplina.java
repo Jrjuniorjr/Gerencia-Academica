@@ -5,7 +5,11 @@ import javax.persistence.*;
 @Table(name="Disciplina")
 public class Disciplina {
 
-	@Id
+	@Id 
+	@Column (name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@Column(name="codigo")
 	private String codigo;
 
@@ -36,10 +40,11 @@ public class Disciplina {
 	
 		
 	
-	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,
+	public Disciplina(int id, String codigo, int numTotalHoras, Departamento departamento,
 			int cargaHoraria, int credito,
 			String nomeDisciplina, Professor professor) {
 		super();
+		this.id = id;
 		this.codigo = codigo;
 		this.numTotalHoras = numTotalHoras;
 		this.departamento = departamento;
@@ -52,6 +57,16 @@ public class Disciplina {
 
 	public Disciplina(){
 		
+	}
+
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCodigo() {

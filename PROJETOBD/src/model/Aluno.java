@@ -9,7 +9,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="Aluno")
 public class Aluno {
-	@Id
+	@Id 
+	@Column (name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@Column(name="cpf")
 	private String cpf;
 	
@@ -39,10 +43,11 @@ public class Aluno {
 	private List<Matricula> matriculas = new ArrayList<>();
 	
 	
-	public Aluno(String cpf, String nome,
+	public Aluno(int id, String cpf, String nome,
 			String sobrenome, TipoAlunoEnum tipoAluno,
 			Date dataNascimento, Endereco endereco) {
 		super();
+		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -56,6 +61,15 @@ public class Aluno {
 		
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}

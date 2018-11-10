@@ -12,7 +12,7 @@ public class Matricula {
 	@Id 
 	@Column (name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int id;
 	
 	@ManyToOne(
 			fetch=FetchType.EAGER
@@ -31,7 +31,6 @@ public class Matricula {
 	)
 	private Curso curso;
 	
-	@Id
 	@Column(name="num_matricula")
 	private String matricula;
 	
@@ -43,9 +42,10 @@ public class Matricula {
 	@Column(name="Tipo", columnDefinition="enum('Ativo', 'Inativo')")
 	private StatusMatriculaEnum statusMatricula;
 	
-	public Matricula(Aluno aluno, Curso curso, Date dataInicio,
+	public Matricula(int id, Aluno aluno, Curso curso, Date dataInicio,
 			StatusMatriculaEnum statusMatricula) {
 		super();
+		this.id = id;
 		this.aluno = aluno;
 		this.curso = curso;
 		this.matricula = this.gerarMatricula();
@@ -62,19 +62,20 @@ public class Matricula {
 		String matriculaGerada;
 		
 		matriculaGerada = Integer.toString(cal.get(Calendar.DAY_OF_YEAR));
-		matriculaGerada = matriculaGerada + this.getCurso();
+		matriculaGerada = matriculaGerada + this.getCurso().getCodigo();
 		matriculaGerada = matriculaGerada + Integer.toString(this.getId());
 		
 		return matriculaGerada;
 	}
 	
 	
+
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Aluno getAluno() {

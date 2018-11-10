@@ -8,7 +8,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="Curso")
 public class Curso {
-	@Id
+	@Id 
+	@Column (name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@Column(name="codigo")
 	private String codigo;
 	
@@ -29,7 +33,8 @@ public class Curso {
 	)
 	private List<Matricula> matriculas = new ArrayList<>();
 	
-	public Curso(String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
+	public Curso(int id, String codigo, String nomeCurso, int numeroCreditoConclusao, Departamento departamento) {
+		this.id = id;
 		this.codigo = codigo;
 		this.nomeCurso = nomeCurso;
 		this.numeroCreditoConclusao = numeroCreditoConclusao;
@@ -39,6 +44,16 @@ public class Curso {
 	public Curso(){
 		
 		
+	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCodigo() {
