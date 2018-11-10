@@ -42,12 +42,12 @@ public class Matricula {
 	@Column(name="tipo", columnDefinition="enum('Ativo', 'Inativo')")
 	private StatusMatriculaEnum statusMatricula;
 	
-	public Matricula(String matricula, Aluno aluno, Curso curso, Date dataInicio,
+	public Matricula(Aluno aluno, Curso curso, Date dataInicio,
 			StatusMatriculaEnum statusMatricula) {
 		super();
 		this.aluno = aluno;
 		this.curso = curso;
-		this.matricula = matricula;
+		this.matricula = gerarMatricula();
 		this.dataInicio = dataInicio;
 		this.statusMatricula = statusMatricula;
 	}
@@ -56,7 +56,7 @@ public class Matricula {
 		
 	}
 	
-	/*public String gerarMatricula() {
+	public String gerarMatricula() {
 		Calendar cal = Calendar.getInstance();
 		String matriculaGerada;
 		
@@ -68,7 +68,7 @@ public class Matricula {
 	}
 	
 	
-*/
+
 	public int getId() {
 		return id;
 	}
