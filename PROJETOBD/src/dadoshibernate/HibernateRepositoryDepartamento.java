@@ -23,10 +23,7 @@ public class HibernateRepositoryDepartamento implements IRepDepartamento{
 		// TODO Auto-generated method stub
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-//		Departamento d = entity.find(Departamento.class, e.getId());
 		entity.merge(e);
-		entity.flush();
-		//entity.unwrap(Session.class).update(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}
@@ -35,7 +32,7 @@ public class HibernateRepositoryDepartamento implements IRepDepartamento{
 	public void remover(Departamento e) throws Exception {
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-		entity.merge(e);
+		entity.remove(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}

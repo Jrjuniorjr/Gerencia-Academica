@@ -32,7 +32,7 @@ public class HibernateRepositoryMatricula implements IRepMatricula{
 	public void remover(Matricula e) throws Exception {
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-		entity.merge(e);
+		entity.remove(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}

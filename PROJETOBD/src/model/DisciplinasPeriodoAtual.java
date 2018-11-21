@@ -1,7 +1,7 @@
 package model;
 
 public class DisciplinasPeriodoAtual {
-	private int id;
+	//private int id;
 	private int idMatricula;
 	private int idDisciplina;
 	private double primeiroGQ;
@@ -24,7 +24,7 @@ public class DisciplinasPeriodoAtual {
 	
 	
 	
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 
@@ -33,7 +33,7 @@ public class DisciplinasPeriodoAtual {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+*/
 
 
 	public double getPrimeiroGQ() {

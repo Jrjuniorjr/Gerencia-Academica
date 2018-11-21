@@ -3,7 +3,7 @@ package model;
 import java.sql.Date;
 
 public class HistoricoEscolar {
-	private int id;
+	//private int id;
 	private int idMatricula;
 	private int idDisciplina;
 	private double notaFinal;
@@ -24,14 +24,14 @@ public class HistoricoEscolar {
 
 	
 	
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
-
+*/
 	public double getNotaFinal() {
 		return notaFinal;
 	}

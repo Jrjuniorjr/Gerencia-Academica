@@ -32,7 +32,7 @@ public class HibernateRepositoryProfessor implements IRepProfessor{
 	public void remover(Professor e) throws Exception {
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-		entity.merge(e);
+		entity.remove(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}

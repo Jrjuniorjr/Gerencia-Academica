@@ -31,7 +31,7 @@ public class HibernateRepositoryAluno implements IRepAluno{
 	public void remover(Aluno e) throws Exception {
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-		entity.merge(e);
+		entity.remove(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}

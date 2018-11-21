@@ -68,7 +68,6 @@ public class Matricula {
 	}
 	
 	
-
 	public int getId() {
 		return id;
 	}

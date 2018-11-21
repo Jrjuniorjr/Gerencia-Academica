@@ -9,7 +9,7 @@ import interfaces.*;
 import model.*;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
-/*
+
 public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPeriodoAtual{
 	@Override
 	public void inserir(DisciplinasPeriodoAtual e) throws Exception {
@@ -20,8 +20,8 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getIdMatricula());
-				stmt.setString(2, e.getIdDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.setDouble(3, e.getPrimeiroGQ());
 				stmt.setDouble(4, e.getSegundoGQ());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
@@ -43,8 +43,8 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getMatriculaAluno());
-				stmt.setString(2, e.getCodigoDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.setDouble(3, e.getPrimeiroGQ());
 				stmt.setDouble(4, e.getSegundoGQ());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
@@ -66,8 +66,8 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getMatriculaAluno());
-				stmt.setString(2, e.getCodigoDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -91,10 +91,11 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 			rs = stmt.executeQuery();
 			rs.next();
 			disciplinasPeriodoAtual = new DisciplinasPeriodoAtual();
-			disciplinasPeriodoAtual.setMatriculaAluno(rs.getString("matricula"));
-			disciplinasPeriodoAtual.setCodigoDisciplina(rs.getString("codigo_disciplina"));
-			disciplinasPeriodoAtual.setPrimeiroGQ(rs.getDouble("primeiro_gq"));
-			disciplinasPeriodoAtual.setSegundoGQ(rs.getDouble("segundo_gq"));
+			disciplinasPeriodoAtual.setIdMatricula(rs.getInt("idMatricula"));
+			disciplinasPeriodoAtual.setIdDisciplina(rs.getInt("idDisciplina"));
+			disciplinasPeriodoAtual.setPrimeiroGQ(rs.getDouble("primeiroGQ"));
+			disciplinasPeriodoAtual.setSegundoGQ(rs.getDouble("segundoGQ"));
+			
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){
@@ -104,4 +105,3 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 	}
 
 }
-*/

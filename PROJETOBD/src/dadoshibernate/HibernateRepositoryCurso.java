@@ -34,7 +34,7 @@ public class HibernateRepositoryCurso implements IRepCurso{
 	public void remover(Curso e) throws Exception {
 		EntityManager entity = HibernateUtil.getEntityManager();
 		entity.getTransaction().begin();
-		entity.merge(e);
+		entity.remove(e);
 		entity.getTransaction().commit();
 		entity.close();
 	}

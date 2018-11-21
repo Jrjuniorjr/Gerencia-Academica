@@ -6,7 +6,7 @@ import interfaces.IRepHistoricoEscolar;
 import model.*;
 import util.*;
 
-/*
+
 public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 	@Override
 	public void inserir(HistoricoEscolar e) throws Exception {
@@ -17,8 +17,8 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getMatriculaAluno());
-				stmt.setString(2, e.getCodigoDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.setDouble(3, e.getNotaFinal());
 				stmt.setDate(4, e.getDataCursada());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
@@ -40,8 +40,8 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getMatriculaAluno());
-				stmt.setString(2, e.getCodigoDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.setDouble(3, e.getNotaFinal());
 				stmt.setDate(4, e.getDataCursada());
 				//stmt.setString(4, e.getDepartamento().getCodigo());
@@ -63,8 +63,8 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
 			if(e != null){
-				stmt.setString(1, e.getMatriculaAluno());
-				stmt.setString(2, e.getCodigoDisciplina());
+				stmt.setInt(1, e.getIdMatricula());
+				stmt.setInt(2, e.getIdDisciplina());
 				stmt.executeUpdate();
 				stmt.close();
 				con.close();
@@ -88,10 +88,10 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 			rs = stmt.executeQuery();
 			rs.next();
 			historicoEscolar = new HistoricoEscolar();
-			historicoEscolar.setMatriculaAluno(rs.getString("num_matricula"));
-			historicoEscolar.setCodigoDisciplina(rs.getString("codigo_disciplina"));
-			historicoEscolar.setNotaFinal(rs.getDouble("nota_final"));
-			historicoEscolar.setDataCursada(rs.getDate("data_cursada"));
+			historicoEscolar.setIdMatricula(rs.getInt("idMatricula"));
+			historicoEscolar.setIdDisciplina(rs.getInt("idDisciplina"));
+			historicoEscolar.setNotaFinal(rs.getDouble("notaFinal"));
+			historicoEscolar.setDataCursada(rs.getDate("dataCursada"));
 			stmt.close();
 			con.close();
 		}catch(SQLException ex){
@@ -101,4 +101,3 @@ public class JDBCRepositoryHistoricoEscolar implements IRepHistoricoEscolar{
 	}
 
 }
-*/
