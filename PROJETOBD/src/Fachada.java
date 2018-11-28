@@ -167,5 +167,8 @@ public class Fachada {
 	public void atualizarDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
 		this.controllerDisciplinasPeriodoAtual.atualizar(disciplinasPeriodoAtual);
 	}
+	public void makeAtaPresenca(int idDisciplina){
+		
+	}
 
 }

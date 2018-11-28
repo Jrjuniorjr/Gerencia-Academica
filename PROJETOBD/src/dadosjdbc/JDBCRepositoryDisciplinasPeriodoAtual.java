@@ -83,7 +83,7 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 		PreparedStatement stmt;
 		ResultSet rs;
 		DisciplinasPeriodoAtual disciplinasPeriodoAtual = null;
-		String sql = SQLUtil.getProperties().getProperty("sql.cursando.procurar");
+		String sql = SQLUtil.getProperties().getProperty("sql.cursando.procurarPorIdMatricula");
 		try{
 			con = JDBCConnectionUtil.getConnection();
 			stmt = con.prepareStatement(sql);
@@ -103,5 +103,11 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 		}
 		return disciplinasPeriodoAtual;
 	}
+
+	/*@Override
+	public DisciplinasPeriodoAtual procurarPorId(int id) {
+		
+		return null;
+	}*/
 
 }
