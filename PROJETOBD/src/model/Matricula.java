@@ -1,7 +1,9 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -31,6 +33,9 @@ public class Matricula {
 	)
 	private Curso curso;
 	
+
+	private List<HistoricoEscolar> historico = new ArrayList<>();
+	
 	@Column(name="numeroMatricula")
 	private String matricula;
 	
@@ -42,8 +47,7 @@ public class Matricula {
 	@Column(name="tipo", columnDefinition="enum('Ativo', 'Inativo')")
 	private StatusMatriculaEnum statusMatricula;
 	
-	public Matricula(Aluno aluno, Curso curso, Date dataInicio,
-			StatusMatriculaEnum statusMatricula) {
+	public Matricula(Aluno aluno, Curso curso, Date dataInicio,StatusMatriculaEnum statusMatricula) {
 		super();
 		this.aluno = aluno;
 		this.curso = curso;

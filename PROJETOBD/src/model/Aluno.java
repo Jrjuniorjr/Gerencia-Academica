@@ -43,6 +43,7 @@ public class Aluno {
 	private List<Matricula> matriculas = new ArrayList<>();
 	
 	
+	
 	public Aluno(String cpf, String nome,
 			String sobrenome, TipoAlunoEnum tipoAluno,
 			Date dataNascimento, Endereco endereco) {

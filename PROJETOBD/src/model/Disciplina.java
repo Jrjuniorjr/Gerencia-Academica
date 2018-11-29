@@ -38,6 +38,11 @@ public class Disciplina {
 	@JoinColumn(name="idProfessor")
 	private Professor professor;
 	
+	@OneToMany(
+			mappedBy="disciplina"
+	)
+	private List<HistoricoEscolar> historico = new ArrayList<>();
+	
 		
 	
 	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,

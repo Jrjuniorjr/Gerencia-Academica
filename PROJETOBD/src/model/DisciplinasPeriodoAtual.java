@@ -1,17 +1,50 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="Cursando")
 public class DisciplinasPeriodoAtual {
-	//private int id;
-	private int idMatricula;
-	private int idDisciplina;
+	@Id 
+	@Column (name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@ManyToOne(
+			fetch=FetchType.EAGER
+	)
+	@JoinColumn(
+			name="idMatricula"
+	)
+	private Matricula matricula;
+	
+	@ManyToOne(
+			fetch= FetchType.EAGER
+	)
+	@JoinColumn(
+			name= "idDisciplina"
+	)
+	private Disciplina disciplina;
+	
+	@Column(name = "primeiroGQ")
 	private double primeiroGQ;
+	
+	@Column(name = "segundoGQ")
 	private double segundoGQ;
 
-	public DisciplinasPeriodoAtual(int idMatricula, int idDisciplina, double primeiroGQ,
+	public DisciplinasPeriodoAtual(Matricula matricula, Disciplina disciplina, double primeiroGQ,
 			double segundoGQ) {
 		super();
-		this.idMatricula = idMatricula;
-		this.idDisciplina = idDisciplina;
+		this.matricula = matricula;
+		this.disciplina = disciplina;
 		this.primeiroGQ = primeiroGQ;
 		this.segundoGQ = segundoGQ;
 	}
@@ -24,7 +57,7 @@ public class DisciplinasPeriodoAtual {
 	
 	
 	
-	/*public int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -33,7 +66,7 @@ public class DisciplinasPeriodoAtual {
 	public void setId(int id) {
 		this.id = id;
 	}
-*/
+
 
 
 	public double getPrimeiroGQ() {
@@ -51,26 +84,26 @@ public class DisciplinasPeriodoAtual {
 
 
 
-	public int getIdMatricula() {
-		return idMatricula;
+	public Matricula getMatricula() {
+		return matricula;
 	}
 
 
 
-	public void setIdMatricula(int idMatricula) {
-		this.idMatricula = idMatricula;
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
 	}
 
 
 
-	public int getIdDisciplina() {
-		return idDisciplina;
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 
 
 
-	public void setIdDisciplina(int idDisciplina) {
-		this.idDisciplina = idDisciplina;
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 	
 
