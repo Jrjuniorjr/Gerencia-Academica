@@ -45,9 +45,9 @@ public class Matricula {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo", columnDefinition="enum('Ativo', 'Inativo')")
-	private StatusMatriculaEnum statusMatricula;
+	private StatusAtivacao statusMatricula;
 	
-	public Matricula(Aluno aluno, Curso curso, Date dataInicio,StatusMatriculaEnum statusMatricula) {
+	public Matricula(Aluno aluno, Curso curso, Date dataInicio,StatusAtivacao statusMatricula) {
 		super();
 		this.aluno = aluno;
 		this.curso = curso;
@@ -105,11 +105,11 @@ public class Matricula {
 		this.dataInicio = dataInicio;
 	}
 
-	public StatusMatriculaEnum getStatusMatricula() {
+	public StatusAtivacao getStatusMatricula() {
 		return statusMatricula;
 	}
 
-	public void setStatusMatricula(StatusMatriculaEnum statusMatricula) {
+	public void setStatusMatricula(StatusAtivacao statusMatricula) {
 		this.statusMatricula = statusMatricula;
 	}
 	

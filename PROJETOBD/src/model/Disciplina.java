@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 @Entity
 @Table(name="Disciplina")
@@ -27,7 +30,11 @@ public class Disciplina {
 
 	@Column(name="credito")
 	private int credito;
-
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="tipo", columnDefinition="enum('Ativo', 'Inativo')")
+	private StatusAtivacao statusDisciplina;
+	
 	
 	@Column(name="nomeDisciplina")
 	private String nomeDisciplina;
@@ -46,7 +53,7 @@ public class Disciplina {
 		
 	
 	public Disciplina(String codigo, int numTotalHoras, Departamento departamento,
-			int cargaHoraria, int credito,
+			int cargaHoraria, int credito, StatusAtivacao statusDisciplina,
 			String nomeDisciplina, Professor professor) {
 		super();
 		this.codigo = codigo;
@@ -56,13 +63,14 @@ public class Disciplina {
 		this.credito = credito;
 		this.nomeDisciplina = nomeDisciplina;
 		this.professor = professor;
+		this.statusDisciplina = statusDisciplina;
 		
 	}
 
 	public Disciplina(){
 		
 	}
-
+	
 	
 	
 	public int getId() {
@@ -131,6 +139,15 @@ public class Disciplina {
 	public void setCredito(int credito) {
 		this.credito = credito;
 	}
+	
+	public StatusAtivacao getStatusDisciplina() {
+		return statusDisciplina;
+	}
+
+	public void setStatusDisciplina(StatusAtivacao statusDisciplina) {
+		this.statusDisciplina = statusDisciplina;
+	}
+
 
 
 	public String getNomeDisciplina() {

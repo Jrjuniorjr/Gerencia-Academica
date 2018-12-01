@@ -9,19 +9,19 @@ public class Main {
 		//INSERT INTO `mydb`.`Departamento` (`codigo`, `nome`, `bloco`) VALUES ('CCT', 'Centro de Ciências Tecnológicas', 'D');
 		Fachada f = Fachada.getInstance();
 		try {
-			Departamento d = f.consultarDepartamento("M4");
+			Departamento d = f.consultarDepartamento("comap");
 			System.out.println("Nome do departamento: " + d.getNome());
-			Professor p = f.consultarProfessor("101010");
+			Professor p = f.consultarProfessor("502");
 			System.out.println("Nome do professor: " + p.getNome());
-			Curso curso = f.consultarCurso("1010");
+			Curso curso = f.consultarCurso("edz3531");
 			System.out.println("Nome do curso: " + curso.getNomeCurso());
-			Disciplina d1 = f.consultarDisciplina("10");
+			Disciplina d1 = f.consultarDisciplina("cvc443");
 			System.out.println("Nome da disciplina: " + d1.getNomeDisciplina());
-			Endereco end = new Endereco("15", "20", "ryrtu", "yytuyi");
-			Aluno aluno = f.consultarAluno("15");
+		//	Endereco end = new Endereco("15", "20", "ryrtu", "yytuyi");
+			Aluno aluno = f.consultarAluno("7");
 			System.out.println("Nome do aluno: " + aluno.getNome());
-			Matricula matricula = new Matricula("12321", aluno, curso, new Date(2018, 12, 12), StatusMatriculaEnum.Ativo);
-			f.inserirMatricula(matricula);
+	//		Matricula matricula = new Matricula(aluno, curso, new Date(2018, 12, 12), StatusMatriculaEnum.Ativo);
+	//		f.inserirMatricula(matricula);
 			
 			
 		} catch (Exception e1) {

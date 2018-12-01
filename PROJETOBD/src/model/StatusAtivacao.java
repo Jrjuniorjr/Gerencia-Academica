@@ -1,6 +1,6 @@
 package model;
 
-public enum StatusMatriculaEnum {
+public enum StatusAtivacao {
 	Ativo,
 	Inativo;
 

@@ -9,7 +9,7 @@ import interfaces.*;
 import model.*;
 import util.JDBCConnectionUtil;
 import util.SQLUtil;
-
+/*
 public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPeriodoAtual{
 	@Override
 	public void inserir(DisciplinasPeriodoAtual e) throws Exception {
@@ -108,6 +108,7 @@ public class JDBCRepositoryDisciplinasPeriodoAtual implements IRepDisciplinasPer
 	public DisciplinasPeriodoAtual procurarPorId(int id) {
 		
 		return null;
-	}*/
+	}
 
 }
+*/
