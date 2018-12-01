@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Disciplina` (
   `idDepartamento` int NOT NULL,
   `cargaHoraria` INT NULL,
   `credito` INT NULL,
+  `tipo` ENUM('Ativo', 'Inativo') NULL,
   `nomeDisciplina` VARCHAR(45) NULL,
   `idProfessor` int NOT NULL,
   PRIMARY KEY (`id`),
