@@ -9,21 +9,15 @@ public class Main {
 		//INSERT INTO `mydb`.`Departamento` (`codigo`, `nome`, `bloco`) VALUES ('CCT', 'Centro de Ciências Tecnológicas', 'D');
 		Fachada f = Fachada.getInstance();
 		try {
-			Departamento d = f.consultarDepartamento("comap");
-			System.out.println("Nome do departamento: " + d.getNome());
-			Professor p = f.consultarProfessor("502");
-			System.out.println("Nome do professor: " + p.getNome());
-			Curso curso = f.consultarCurso("edz3531");
-			System.out.println("Nome do curso: " + curso.getNomeCurso());
-			Disciplina d1 = f.consultarDisciplina("cvc443");
-			System.out.println("Nome da disciplina: " + d1.getNomeDisciplina());
-		//	Endereco end = new Endereco("15", "20", "ryrtu", "yytuyi");
-			Aluno aluno = f.consultarAluno("7");
-			System.out.println("Nome do aluno: " + aluno.getNome());
-	//		Matricula matricula = new Matricula(aluno, curso, new Date(2018, 12, 12), StatusMatriculaEnum.Ativo);
-	//		f.inserirMatricula(matricula);
-			
-			
+			Departamento dep = new Departamento("ComputacaoBloco", "AZX", 'C');
+			f.inserirDepartamento(dep);
+			/*Professor p = new Professor("123431", "1234", "YT", "ZY", dep);
+			f.inserirProfessor(p);
+			Disciplina disciplina = new Disciplina("Z1", 10, dep, 60, 5, StatusAtivacao.Ativo, "ZARA1", p);
+			f.inserirDisciplina(disciplina);
+			/*Matricula m = 
+			DisciplinasPeriodoAtual d = new  DisciplinasPeriodoAtual(matricula, disciplina, 9.0, 9.0);
+			*/
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

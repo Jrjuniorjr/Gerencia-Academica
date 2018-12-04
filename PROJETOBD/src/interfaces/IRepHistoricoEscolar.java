@@ -1,7 +1,9 @@
 package interfaces;
 
-import model.HistoricoEscolar;
+import model.*;
 
-public interface IRepHistoricoEscolar extends IRepGenerico<HistoricoEscolar>{
-//	public HistoricoEscolar procurarPorId(int id);
+public interface IRepHistoricoEscolar{
+	public HistoricoEscolar procurarPorId(int id);
+	public HistoricoEscolar procurarPorMatricula(Matricula matricula);
+	public HistoricoEscolar procurarPorDisciplina(Disciplina disciplina);
 }

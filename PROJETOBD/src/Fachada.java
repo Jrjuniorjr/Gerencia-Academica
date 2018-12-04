@@ -21,8 +21,8 @@ public class Fachada {
 		this.controllerDisciplina = new ControllerDisciplina(new HibernateRepositoryDisciplina());
 		this.controllerAluno = new ControllerAluno(new HibernateRepositoryAluno());
 		this.controllerMatricula = new ControllerMatricula(new HibernateRepositoryMatricula());
-		controllerHistoricoEscolar = new ControllerHistoricoEscolar(new JDBCRepositoryHistoricoEscolar());
-		this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(new JDBCRepositoryDisciplinasPeriodoAtual());
+		this.controllerHistoricoEscolar = new ControllerHistoricoEscolar(new HibernateRepositoryHistoricoEscolar());
+		this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(new HibernateRepositoryDisciplinasPeriodoAtual());
 	}
 
 	public static Fachada getInstance() {
@@ -135,21 +135,19 @@ public class Fachada {
 	}
 
 	// OPERAÇÕES DE HISTORICO ESCOLAR
-	public void inserirHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
-		this.controllerHistoricoEscolar.inserir(historicoEscolar);
+
+	public HistoricoEscolar consultarHistoricoEscolarPorId(int id) throws Exception {
+		return this.controllerHistoricoEscolar.procurarPorId(id);
+	}
+	
+	public HistoricoEscolar consultarHistoricoEscolarPorMatricula(Matricula matricula) throws Exception {
+		return this.controllerHistoricoEscolar.procurarPorMatricula(matricula);
 	}
 
-	public void removerHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
-		this.controllerHistoricoEscolar.remover(historicoEscolar);
+	public HistoricoEscolar consultarHistoricoEscolarPorDisciplina(Disciplina disciplina) throws Exception {
+		return this.controllerHistoricoEscolar.procurarPorDisciplina(disciplina);
 	}
 
-	public HistoricoEscolar consultarHistoricoEscolar(String key) throws Exception {
-		return this.controllerHistoricoEscolar.consultar(key);
-	}
-
-	public void atualizarHistoricoEscolar(HistoricoEscolar historicoEscolar) throws Exception {
-		this.controllerHistoricoEscolar.atualizar(historicoEscolar);
-	}
 
 	// OPERAÇÕES DE DISCIPLINAS DO PERIODO ATUAL
 	public void inserirDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
@@ -160,13 +158,23 @@ public class Fachada {
 		this.controllerDisciplinasPeriodoAtual.remover(disciplinasPeriodoAtual);
 	}
 
-	public DisciplinasPeriodoAtual consultarDisciplinasPeriodoAtual(String key) throws Exception {
-		return this.controllerDisciplinasPeriodoAtual.consultar(key);
+	public DisciplinasPeriodoAtual consultarDisciplinasPeriodoAtualPorId(int id) throws Exception {
+		return this.controllerDisciplinasPeriodoAtual.procurarPorId(id);
 	}
 
+	public DisciplinasPeriodoAtual consultarDisciplinasPeriodoAtualPorMatricula(Matricula matricula) throws Exception {
+		return this.controllerDisciplinasPeriodoAtual.procurarPorMatricula(matricula);
+	}
+	
+	public DisciplinasPeriodoAtual consultarDisciplinasPeriodoAtualPorDisciplina(Disciplina disciplina) throws Exception {
+		return this.controllerDisciplinasPeriodoAtual.procurarPorDisciplina(disciplina);
+	}
+	
 	public void atualizarDisciplinasPeriodoAtual(DisciplinasPeriodoAtual disciplinasPeriodoAtual) throws Exception {
 		this.controllerDisciplinasPeriodoAtual.atualizar(disciplinasPeriodoAtual);
 	}
+	
+	//PROCEDURES
 	public void makeAtaPresenca(int idDisciplina){
 		
 	}
