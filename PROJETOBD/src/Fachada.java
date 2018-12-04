@@ -2,6 +2,7 @@ import controllers.*;
 import dadoshibernate.*;
 import dadosjdbc.*;
 import model.*;
+import storedprocedures.JDBCStoredProcedures;
 
 public class Fachada {
 	private static Fachada instancia;
@@ -13,6 +14,7 @@ public class Fachada {
 	private ControllerMatricula controllerMatricula;
 	private ControllerHistoricoEscolar controllerHistoricoEscolar;
 	private ControllerDisciplinasPeriodoAtual controllerDisciplinasPeriodoAtual;
+	private ControllerStoredProcedures controllerStoredProcedures;
 
 	private Fachada() {
 		this.controllerProfessor = new ControllerProfessor(new HibernateRepositoryProfessor());
@@ -23,6 +25,7 @@ public class Fachada {
 		this.controllerMatricula = new ControllerMatricula(new HibernateRepositoryMatricula());
 		this.controllerHistoricoEscolar = new ControllerHistoricoEscolar(new HibernateRepositoryHistoricoEscolar());
 		this.controllerDisciplinasPeriodoAtual = new ControllerDisciplinasPeriodoAtual(new HibernateRepositoryDisciplinasPeriodoAtual());
+		this.controllerStoredProcedures = new ControllerStoredProcedures(new JDBCStoredProcedures());
 	}
 
 	public static Fachada getInstance() {
@@ -175,8 +178,21 @@ public class Fachada {
 	}
 	
 	//PROCEDURES
-	public void makeAtaPresenca(int idDisciplina){
-		
+	public void makeAtaPresenca(Disciplina disciplina){
+		this.controllerStoredProcedures.makeAtaPresenca(disciplina);
+	}
+	public void alterarNotaManeiraSegura(DisciplinasPeriodoAtual disciplinasPeriodoAtual){
+		this.controllerStoredProcedures.alterarNotaManeiraSegura(disciplinasPeriodoAtual);
+	}
+
+	public void demitirProfessor(Professor professor){
+		this.controllerStoredProcedures.demitirProfessor(professor);
+	}
+	public void inserirDisciplinaObrigatoriaRecalcularCreditosCurso(Disciplina disciplina, Curso curso){
+		this.controllerStoredProcedures.inserirDisciplinaObrigatoriaRecalcularCreditosCurso(disciplina, curso);
+	}
+	public void cursandoParaHistorico(){
+		this.controllerStoredProcedures.cursandoParaHistorico();
 	}
 
 }
