@@ -9,15 +9,19 @@ public class Main {
 		//INSERT INTO `mydb`.`Departamento` (`codigo`, `nome`, `bloco`) VALUES ('CCT', 'Centro de Ciências Tecnológicas', 'D');
 		Fachada f = Fachada.getInstance();
 		try {
-			Departamento dep = new Departamento("ComputacaoBloco", "AZX", 'C');
-			f.inserirDepartamento(dep);
-			/*Professor p = new Professor("123431", "1234", "YT", "ZY", dep);
-			f.inserirProfessor(p);
-			Disciplina disciplina = new Disciplina("Z1", 10, dep, 60, 5, StatusAtivacao.Ativo, "ZARA1", p);
-			f.inserirDisciplina(disciplina);
-			/*Matricula m = 
-			DisciplinasPeriodoAtual d = new  DisciplinasPeriodoAtual(matricula, disciplina, 9.0, 9.0);
+		/*(	Departamento dep = f.consultarDepartamento("CCT");
+			Professor professor = f.consultarProfessor("123");
+			Curso curso = f.consultarCurso("123");
+			Endereco end = new Endereco("123", "5250", "a", "o");
+			Aluno aluno = f.consultarAluno("123");
 			*/
+			Disciplina disciplina = f.consultarDisciplina("123");
+			Matricula matricula = f.consultarMatricula("3381230");
+			DisciplinasPeriodoAtual dpa = f.consultarDisciplinasPeriodoAtualPorId(4);
+			System.out.println("ID: " + dpa.getId() + "---" + "PRIMEIGQ: " + dpa.getPrimeiroGQ());
+			//HistoricoEscolar he = f.consultarHistoricoEscolarPorId(1);
+			//he.getMatricula().getId() + "---" + "Id Disciplina: " + he.getDisciplina().getId()
+			//System.out.println("Id Matricula: " + "---" + he.getNotaFinal() + "---" + he.getDataCursada());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

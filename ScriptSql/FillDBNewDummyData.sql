@@ -1,7 +1,7 @@
 #
 # TABLE STRUCTURE FOR: Aluno
 #
-
+DROP TABLE IF EXISTS `Aluno_Endereco`;
 DROP TABLE IF EXISTS `Aluno`;
 
 CREATE TABLE `Aluno` (
@@ -14,6 +14,174 @@ CREATE TABLE `Aluno` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `cpf` (`cpf`)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE `Aluno_Endereco` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cpfAluno` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `rua` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cep` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bairro` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cpfAluno` (`cpfAluno`),
+  CONSTRAINT `Aluno_Endereco_ibfk_1` FOREIGN KEY (`cpfAluno`) REFERENCES `Aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Departamento`;
+
+CREATE TABLE `Departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bloco` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Departamento`;
+
+CREATE TABLE `Departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bloco` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Curso`;
+
+CREATE TABLE `Curso` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `nomeCurso` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numeroCreditoConclusao` int(11) DEFAULT NULL,
+  `idDepartamento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`),
+  KEY `idDepartamento` (`idDepartamento`),
+  CONSTRAINT `Curso_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Matricula`;
+
+CREATE TABLE `Matricula` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `numeroMatricula` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `idCurso` int(11) NOT NULL,
+  `tipo` enum('Ativo','Inativo') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataInicio` date DEFAULT NULL,
+  `idAluno` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idCurso` (`idCurso`),
+  KEY `idAluno` (`idAluno`),
+  CONSTRAINT `Matricula_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`),
+  CONSTRAINT `Matricula_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `Aluno` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+DROP TABLE IF EXISTS `Professor`;
+
+CREATE TABLE `Professor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `matriculaProfessor` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `CFE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sobrenome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idDepartamento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `matriculaProfessor` (`matriculaProfessor`),
+  KEY `idDepartamento` (`idDepartamento`),
+  CONSTRAINT `Professor_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `Disciplina`;
+
+CREATE TABLE `Disciplina` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `numeroTotalHoras` int(11) DEFAULT NULL,
+  `idDepartamento` int(11) NOT NULL,
+  `cargaHoraria` int(11) DEFAULT NULL,
+  `credito` int(11) DEFAULT NULL,
+  `tipo` enum('Ativo','Inativo') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nomeDisciplina` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idProfessor` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`),
+  KEY `idDepartamento` (`idDepartamento`),
+  KEY `idProfessor` (`idProfessor`),
+  CONSTRAINT `Disciplina_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Disciplina_ibfk_2` FOREIGN KEY (`idProfessor`) REFERENCES `Professor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `Historico`;
+
+CREATE TABLE `Historico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idMatricula` int(11) NOT NULL,
+  `idDisciplina` int(11) NOT NULL,
+  `notaFinal` float DEFAULT NULL,
+  `dataCursada` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idDisciplina` (`idDisciplina`),
+  KEY `idMatricula` (`idMatricula`),
+  CONSTRAINT `Historico_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Historico_ibfk_2` FOREIGN KEY (`idMatricula`) REFERENCES `Matricula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1201 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `Optativa`;
+
+CREATE TABLE `Optativa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idDisciplina` int(11) NOT NULL,
+  `idCurso` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idDisciplina` (`idDisciplina`),
+  KEY `idCurso` (`idCurso`),
+  CONSTRAINT `Optativa_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Optativa_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Composto_Obrigatoria`;
+
+CREATE TABLE `Composto_Obrigatoria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idDisciplina` int(11) NOT NULL,
+  `idCurso` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idDisciplina` (`idDisciplina`),
+  KEY `idCurso` (`idCurso`),
+  CONSTRAINT `Composto_Obrigatoria_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Composto_Obrigatoria_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=751 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `Cursando`;
+
+CREATE TABLE `Cursando` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idMatricula` int(11) NOT NULL,
+  `idDisciplina` int(11) NOT NULL,
+  `primeiroGQ` double DEFAULT NULL,
+  `segundoGQ` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idDisciplina` (`idDisciplina`),
+  KEY `idMatricula` (`idMatricula`),
+  CONSTRAINT `Cursando_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Cursando_ibfk_2` FOREIGN KEY (`idMatricula`) REFERENCES `Matricula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=601 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
 
 INSERT INTO `Aluno` (`id`, `cpf`, `nome`, `sobrenome`, `tipo`, `dataNascimento`) VALUES (1, '43697060888', 'Sallie', 'Goldner', 'Transferencia', '1996-09-21');
 INSERT INTO `Aluno` (`id`, `cpf`, `nome`, `sobrenome`, `tipo`, `dataNascimento`) VALUES (2, '71506794920', 'Viviane', 'Ebert', 'Vestibular', '2009-08-10');
@@ -121,18 +289,7 @@ INSERT INTO `Aluno` (`id`, `cpf`, `nome`, `sobrenome`, `tipo`, `dataNascimento`)
 # TABLE STRUCTURE FOR: Aluno_Endereco
 #
 
-DROP TABLE IF EXISTS `Aluno_Endereco`;
 
-CREATE TABLE `Aluno_Endereco` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cpfAluno` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `rua` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cep` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `bairro` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cpfAluno` (`cpfAluno`),
-  CONSTRAINT `Aluno_Endereco_ibfk_1` FOREIGN KEY (`cpfAluno`) REFERENCES `Aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Aluno_Endereco` (`id`, `cpfAluno`, `rua`, `cep`, `bairro`) VALUES (1, '02712844274', 'Beier Wells', '48071-0058', 'Virginia');
 INSERT INTO `Aluno_Endereco` (`id`, `cpfAluno`, `rua`, `cep`, `bairro`) VALUES (2, '02846368606', 'Shad Dam', '52895-3351', 'Iowa');
@@ -240,18 +397,6 @@ INSERT INTO `Aluno_Endereco` (`id`, `cpfAluno`, `rua`, `cep`, `bairro`) VALUES (
 # TABLE STRUCTURE FOR: Composto_Obrigatoria
 #
 
-DROP TABLE IF EXISTS `Composto_Obrigatoria`;
-
-CREATE TABLE `Composto_Obrigatoria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idDisciplina` int(11) NOT NULL,
-  `idCurso` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idDisciplina` (`idDisciplina`),
-  KEY `idCurso` (`idCurso`),
-  CONSTRAINT `Composto_Obrigatoria_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Composto_Obrigatoria_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=751 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Composto_Obrigatoria` (`id`, `idDisciplina`, `idCurso`) VALUES (1, 1, 1);
 INSERT INTO `Composto_Obrigatoria` (`id`, `idDisciplina`, `idCurso`) VALUES (2, 2, 2);
@@ -1009,20 +1154,7 @@ INSERT INTO `Composto_Obrigatoria` (`id`, `idDisciplina`, `idCurso`) VALUES (750
 # TABLE STRUCTURE FOR: Cursando
 #
 
-DROP TABLE IF EXISTS `Cursando`;
 
-CREATE TABLE `Cursando` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idMatricula` int(11) NOT NULL,
-  `idDisciplina` int(11) NOT NULL,
-  `primeiroGQ` double DEFAULT NULL,
-  `segundoGQ` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idDisciplina` (`idDisciplina`),
-  KEY `idMatricula` (`idMatricula`),
-  CONSTRAINT `Cursando_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Cursando_ibfk_2` FOREIGN KEY (`idMatricula`) REFERENCES `Matricula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=601 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Cursando` (`id`, `idMatricula`, `idDisciplina`, `primeiroGQ`, `segundoGQ`) VALUES (1, 1, 1, '6.9', '1.9');
 INSERT INTO `Cursando` (`id`, `idMatricula`, `idDisciplina`, `primeiroGQ`, `segundoGQ`) VALUES (2, 2, 2, '4.6', '9.6');
@@ -1630,19 +1762,7 @@ INSERT INTO `Cursando` (`id`, `idMatricula`, `idDisciplina`, `primeiroGQ`, `segu
 # TABLE STRUCTURE FOR: Curso
 #
 
-DROP TABLE IF EXISTS `Curso`;
 
-CREATE TABLE `Curso` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `nomeCurso` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `numeroCreditoConclusao` int(11) DEFAULT NULL,
-  `idDepartamento` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo` (`codigo`),
-  KEY `idDepartamento` (`idDepartamento`),
-  CONSTRAINT `Curso_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Curso` (`id`, `codigo`, `nomeCurso`, `numeroCreditoConclusao`, `idDepartamento`) VALUES (1, 'fvf0516', 'sint', 0, 1);
 INSERT INTO `Curso` (`id`, `codigo`, `nomeCurso`, `numeroCreditoConclusao`, `idDepartamento`) VALUES (2, 'ipv7892', 'quidem', 0, 2);
@@ -1725,16 +1845,7 @@ INSERT INTO `Curso` (`id`, `codigo`, `nomeCurso`, `numeroCreditoConclusao`, `idD
 # TABLE STRUCTURE FOR: Departamento
 #
 
-DROP TABLE IF EXISTS `Departamento`;
 
-CREATE TABLE `Departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `bloco` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Departamento` (`id`, `codigo`, `nome`, `bloco`) VALUES (1, 'qxxi', 'Bergstrom, Hoeger and Gutkowski', 'u');
 INSERT INTO `Departamento` (`id`, `codigo`, `nome`, `bloco`) VALUES (2, 'xjee', 'Pagac, Blick and Bashirian', 'i');
@@ -1762,25 +1873,7 @@ INSERT INTO `Departamento` (`id`, `codigo`, `nome`, `bloco`) VALUES (20, 'daxa',
 # TABLE STRUCTURE FOR: Disciplina
 #
 
-DROP TABLE IF EXISTS `Disciplina`;
 
-CREATE TABLE `Disciplina` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `numeroTotalHoras` int(11) DEFAULT NULL,
-  `idDepartamento` int(11) NOT NULL,
-  `cargaHoraria` int(11) DEFAULT NULL,
-  `credito` int(11) DEFAULT NULL,
-  `tipo` enum('Ativo','Inativo') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nomeDisciplina` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idProfessor` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo` (`codigo`),
-  KEY `idDepartamento` (`idDepartamento`),
-  KEY `idProfessor` (`idProfessor`),
-  CONSTRAINT `Disciplina_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Disciplina_ibfk_2` FOREIGN KEY (`idProfessor`) REFERENCES `Professor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Disciplina` (`id`, `codigo`, `numeroTotalHoras`, `idDepartamento`, `cargaHoraria`, `credito`, `tipo`, `nomeDisciplina`, `idProfessor`) VALUES (1, '503', 39, 1, 11, 21, 'Inativo', 'Mollitia iure sint quia ut sed rerum.', 1);
 INSERT INTO `Disciplina` (`id`, `codigo`, `numeroTotalHoras`, `idDepartamento`, `cargaHoraria`, `credito`, `tipo`, `nomeDisciplina`, `idProfessor`) VALUES (2, '650', 56, 2, 17, 24, 'Inativo', 'Ab delectus doloribus voluptatem ea.', 2);
@@ -1988,20 +2081,6 @@ INSERT INTO `Disciplina` (`id`, `codigo`, `numeroTotalHoras`, `idDepartamento`, 
 # TABLE STRUCTURE FOR: Historico
 #
 
-DROP TABLE IF EXISTS `Historico`;
-
-CREATE TABLE `Historico` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idMatricula` int(11) NOT NULL,
-  `idDisciplina` int(11) NOT NULL,
-  `notaFinal` float DEFAULT NULL,
-  `dataCursada` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idDisciplina` (`idDisciplina`),
-  KEY `idMatricula` (`idMatricula`),
-  CONSTRAINT `Historico_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Historico_ibfk_2` FOREIGN KEY (`idMatricula`) REFERENCES `Matricula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1201 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Historico` (`id`, `idMatricula`, `idDisciplina`, `notaFinal`, `dataCursada`) VALUES (1, 1, 1, '9.8', '1996-10-17');
 INSERT INTO `Historico` (`id`, `idMatricula`, `idDisciplina`, `notaFinal`, `dataCursada`) VALUES (2, 2, 2, '9.4', '1974-01-25');
@@ -3209,21 +3288,6 @@ INSERT INTO `Historico` (`id`, `idMatricula`, `idDisciplina`, `notaFinal`, `data
 # TABLE STRUCTURE FOR: Matricula
 #
 
-DROP TABLE IF EXISTS `Matricula`;
-
-CREATE TABLE `Matricula` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numeroMatricula` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `idCurso` int(11) NOT NULL,
-  `tipo` enum('Ativo','Inativo') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataInicio` date DEFAULT NULL,
-  `idAluno` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idCurso` (`idCurso`),
-  KEY `idAluno` (`idAluno`),
-  CONSTRAINT `Matricula_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`),
-  CONSTRAINT `Matricula_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `Aluno` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Matricula` (`id`, `numeroMatricula`, `idCurso`, `tipo`, `dataInicio`, `idAluno`) VALUES (1, '6325701880', 1, 'Ativo', '1989-07-18', 1);
 INSERT INTO `Matricula` (`id`, `numeroMatricula`, `idCurso`, `tipo`, `dataInicio`, `idAluno`) VALUES (2, '6419873952', 2, 'Inativo', '1985-03-08', 2);
@@ -3330,19 +3394,6 @@ INSERT INTO `Matricula` (`id`, `numeroMatricula`, `idCurso`, `tipo`, `dataInicio
 #
 # TABLE STRUCTURE FOR: Optativa
 #
-
-DROP TABLE IF EXISTS `Optativa`;
-
-CREATE TABLE `Optativa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idDisciplina` int(11) NOT NULL,
-  `idCurso` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idDisciplina` (`idDisciplina`),
-  KEY `idCurso` (`idCurso`),
-  CONSTRAINT `Optativa_ibfk_1` FOREIGN KEY (`idDisciplina`) REFERENCES `Disciplina` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Optativa_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Optativa` (`id`, `idDisciplina`, `idCurso`) VALUES (1, 1, 1);
 INSERT INTO `Optativa` (`id`, `idDisciplina`, `idCurso`) VALUES (2, 2, 2);
@@ -3800,20 +3851,7 @@ INSERT INTO `Optativa` (`id`, `idDisciplina`, `idCurso`) VALUES (450, 50, 75);
 # TABLE STRUCTURE FOR: Professor
 #
 
-DROP TABLE IF EXISTS `Professor`;
 
-CREATE TABLE `Professor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `matriculaProfessor` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `CFE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sobrenome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idDepartamento` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `matriculaProfessor` (`matriculaProfessor`),
-  KEY `idDepartamento` (`idDepartamento`),
-  CONSTRAINT `Professor_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `Professor` (`id`, `matriculaProfessor`, `CFE`, `nome`, `sobrenome`, `idDepartamento`) VALUES (1, '70986923', '2198534237', 'Geoffrey', 'Hintz', 1);
 INSERT INTO `Professor` (`id`, `matriculaProfessor`, `CFE`, `nome`, `sobrenome`, `idDepartamento`) VALUES (2, '28777312', '9825897783', 'Constance', 'Williamson', 2);

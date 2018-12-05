@@ -46,8 +46,8 @@ public class JDBCConnectionUtil {
 			if (properties == null) {
 				openFile();
 			}
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mydb", "root", "MySql.321#");
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userName, pass);
 		}
 		return con;
 	}

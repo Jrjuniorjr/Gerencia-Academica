@@ -49,6 +49,11 @@ public class Disciplina {
 			mappedBy="disciplina"
 	)
 	private List<HistoricoEscolar> historico = new ArrayList<>();
+	@OneToMany(
+			mappedBy="disciplina",
+			fetch = FetchType.LAZY
+	)
+	private List<DisciplinasPeriodoAtual> disciplinasPeriodoAtuals = new ArrayList<>();
 	
 		
 	
@@ -157,6 +162,22 @@ public class Disciplina {
 
 	public void setNomeDisciplina(String nomeDisciplina) {
 		this.nomeDisciplina = nomeDisciplina;
+	}
+
+	public List<HistoricoEscolar> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<HistoricoEscolar> historico) {
+		this.historico = historico;
+	}
+
+	public List<DisciplinasPeriodoAtual> getDisciplinasPeriodoAtuals() {
+		return disciplinasPeriodoAtuals;
+	}
+
+	public void setDisciplinasPeriodoAtuals(List<DisciplinasPeriodoAtual> disciplinasPeriodoAtuals) {
+		this.disciplinasPeriodoAtuals = disciplinasPeriodoAtuals;
 	}
 
 	

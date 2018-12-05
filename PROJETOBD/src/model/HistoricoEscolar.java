@@ -41,6 +41,7 @@ public class HistoricoEscolar {
 
 	@Column(name = "notaFinal")
 	private double notaFinal;
+	@Column(name="dataCursada")
 	private Date dataCursada;
 	
 	

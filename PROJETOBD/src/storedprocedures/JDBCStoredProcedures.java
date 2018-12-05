@@ -25,7 +25,7 @@ public class JDBCStoredProcedures implements IStoredProcedures {
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					System.out.println("Numero de matricula" + rs.getString("numeroMatricula") + " ------ " + "Nome: "
-							+ rs.getString("nome") + " ------ " + "Sobrenome: " + rs.getString("sobrenome") + " ------ "
+							+ rs.getString("nome") + " " + rs.getString("sobrenome") + " ------ "
 							+ "Primeiro GQ: " + rs.getDouble("primeiroGQ") + " ------ " + "Segundo GQ: "
 							+ rs.getDouble("segundoGQ"));
 				}
@@ -50,9 +50,10 @@ public class JDBCStoredProcedures implements IStoredProcedures {
 			try {
 				con = JDBCConnectionUtil.getConnection();
 				stmt = con.prepareCall(sql);
-				stmt.setInt(1, disciplinasPeriodoAtual.getId());
-				stmt.setDouble(1, disciplinasPeriodoAtual.getPrimeiroGQ());
-				stmt.setDouble(1, disciplinasPeriodoAtual.getSegundoGQ());
+				stmt.setInt(1, disciplinasPeriodoAtual.getMatricula().getId());
+				stmt.setInt(2, disciplinasPeriodoAtual.getDisciplina().getId());
+				stmt.setDouble(3, disciplinasPeriodoAtual.getPrimeiroGQ());
+				stmt.setDouble(4, disciplinasPeriodoAtual.getSegundoGQ());
 				stmt.execute();
 				stmt.close();
 				con.close();
